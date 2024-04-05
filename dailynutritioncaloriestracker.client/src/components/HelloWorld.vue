@@ -1,6 +1,6 @@
 <template>
-    <div class="weather-component">
-        <h1>Weather forecast</h1>
+    <div class="foodnutrition-component">
+        <h1>food nutrition</h1>
         <p>This component demonstrates fetching data from the server.</p>
 
         <div v-if="loading" class="loading">
@@ -11,21 +11,26 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
+                        <th>Name</th>
+                        <th>Measure</th>
+                        <th>Calories (kcal/100g)</th>
+                        <th>Proteins (g/100g)</th>
+                        <th>Carbohydrates (g/100g)</th>
+                        <th>Fat (g/100g)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="forecast in post" :key="forecast.date">
-                        <td>{{ forecast.date }}</td>
-                        <td>{{ forecast.temperatureC }}</td>
-                        <td>{{ forecast.temperatureF }}</td>
-                        <td>{{ forecast.summary }}</td>
+                    <tr v-for="food in post" :key="food.name">
+                        <td>{{ food.name }}</td>
+                        <td>{{ food.measure }}</td>
+                        <td>{{ food.calories }}</td>
+                        <td>{{ food.protein }}</td>
+                        <td>{{ food.carbs }}</td>
+                        <td>{{ food.fat }}</td>
                     </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </template>
@@ -54,7 +59,7 @@
                 this.post = null;
                 this.loading = true;
 
-                fetch('weatherforecast')
+                fetch('foodnutrition')
                     .then(r => r.json())
                     .then(json => {
                         this.post = json;
@@ -83,7 +88,7 @@ th, td {
     padding-right: .5rem;
 }
 
-.weather-component {
+.foodnutrition-component {
     text-align: center;
 }
 

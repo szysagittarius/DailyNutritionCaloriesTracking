@@ -1,0 +1,6 @@
+@DailyNutritionCaloriesTracker.Server_HostAddress = http://localhost:5074
+
+GET {{DailyNutritionCaloriesTracker.Server_HostAddress}}/FoodNutrition/
+Accept: application/json
+
+###

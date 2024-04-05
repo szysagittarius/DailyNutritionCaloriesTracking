@@ -1,17 +1,22 @@
+# Nutrition Calories Tracker Project
 
-##Description
-a Nutrition calories tracker, the idea is from Ms To-Do app, 
+## Project Overview
+A web application inspired by the Microsoft To-Do app that helps users track their daily food intake and manage their nutritional goals.
 
-based on dictionary of the nutrition/food, 
-control the daily input of food
+## Features
 
+### Backend
+- **User Management**: Authentication, profile management using Azure AD.
+- **Daily Caloric Intake Management**: Users can set and track against a daily caloric limit.
+- **Nutrition/Food Dictionary**: A database of foods and their nutritional information.
+- **Data Analysis and Summary Tracing**: Tools for tracking and analyzing dietary patterns over time.
 
-##feature thoughts
-###backend
-add daily calories uplimit
-add user management 
-add summary tracing, using data mining tools in future
+### UI
+- **Auto-complete Food Entry**: Streamline food logging with an auto-complete feature.
+- **Daily Summary and Progress Tracking**: Visual summaries of daily intake and goal progression.
+- **Responsive and Accessible Design**: Ensure broad access and usability.
 
-###UI
-auto complete
-filter food
+## Technology Stack
+- Backend: .NET, Azure SQL Database/AWS RDS, Azure AD for authentication
+- Frontend: HTML5, CSS3, JavaScript (AJAX for dynamic data fetching)
+- Data Analysis: Potential future integration with data mining tools

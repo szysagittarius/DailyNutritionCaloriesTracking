@@ -131,6 +131,11 @@
                 entries: [{ name: '', amount: 0, calories: 0, protein: 0, carbs: 0, fat: 0 }],
             };
         },
+        props: {
+            value: Number,
+            max: Number,
+            color: String,
+        },
         computed: {
             totalCalories() {
                 return this.entries.reduce((total, entry) => total + entry.calories, 0);
@@ -147,6 +152,10 @@
             progressPercentage() {
                 const percentage = (this.totalCalories / this.suggestedCalories) * 100;
                 return Math.min(percentage, 100); // Cap the percentage at 100% to avoid overflow
+            },
+            progressPercent2() {
+                const percentage = (this.value / this.max) * 100;
+                return percentage > 100 ? 100 : percentage; // Cap the percentage at 100
             },
             circumference() {
                 const radius = 40; // Match the SVG circle's radius

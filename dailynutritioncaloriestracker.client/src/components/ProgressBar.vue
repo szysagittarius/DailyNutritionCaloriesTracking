@@ -1,6 +1,9 @@
 <template>
     <div class="progress-container">
-        <div class="progress-bar" :style="{ width: progressPercent + '%', backgroundColor: color }"></div>
+        <div class="progress-bar"
+             :style="{width: progressPercent2 + '%' ,backgroundColor: value> max ? 'red' : color, }"
+            >
+        </div>
     </div>
 </template>
 
@@ -22,11 +25,12 @@
         width: 100%;
         background-color: #eee;
         border-radius: 8px;
+        height: 20px;
         margin: 10px 0;
     }
 
     .progress-bar {
-        height: 20px;
+        height: 100%;
         border-radius: 8px;
         transition: width 0.3s ease;
     }

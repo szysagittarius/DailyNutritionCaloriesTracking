@@ -50,12 +50,15 @@
         margin: 10px 0;
     }
     .label {
+        color: white; /* Or any color that contrasts well with your progress bar */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         position: absolute; /* Changed to absolute */
+
         top: 0;
         left: 0;
         width: 100%; /* Ensure it spans the entire width */
         text-align: center; /* Center the text horizontally */
-        z-index: 1; /* Ensure it's above the progress bar */        
+        z-index: 1; /* Ensure it's above the progress bar */
     }
 
     .progress-bar {

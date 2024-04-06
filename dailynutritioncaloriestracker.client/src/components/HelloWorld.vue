@@ -1,6 +1,6 @@
 <template>
     <div class="foodnutrition-component">
-        <h1>food nutrition</h1>
+        <h1>Daily food nutrition</h1>
         <p>This component demonstrates fetching data from the server.</p>
 
         <div v-if="loading" class="loading">
@@ -8,29 +8,6 @@
         </div>
 
         <div v-if="post" class="content">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Measure</th>
-                        <th>Calories (kcal/100g)</th>
-                        <th>Proteins (g/100g)</th>
-                        <th>Carbohydrates (g/100g)</th>
-                        <th>Fat (g/100g)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="food in post" :key="food.name">
-                        <td>{{ food.name }}</td>
-                        <td>{{ food.measure }}</td>
-                        <td>{{ food.calories }}</td>
-                        <td>{{ food.protein }}</td>
-                        <td>{{ food.carbs }}</td>
-                        <td>{{ food.fat }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
 
             <table>
                 <thead>
@@ -75,48 +52,33 @@
             </div>
 
             <!-- Circular Progress Indicator -->
-            <svg width="100" height="100" viewBox="0 0 100 100">
-                <circle cx="50"
-                        cy="50"
-                        r="40"
+
+
+            <svg width="220" height="220" viewBox="-10 -10 220 220">
+                <circle cx="100"
+                        cy="100"
+                        r="80"
                         fill="none"
                         stroke="lightgrey"
-                        stroke-width="10" />
-                <circle cx="50"
-                        cy="50"
-                        r="40"
+                        stroke-width="20" />
+                <circle cx="100"
+                        cy="100"
+                        r="80"
                         fill="none"
                         :stroke="totalCalories > suggestedCalories ? 'red' : 'green'"
-                        stroke-width="10"
+                        stroke-width="20"
                         stroke-linecap="round"
                         :stroke-dasharray="circumference"
-                        :stroke-dashoffset="circumference * (1 - progressPercentage / 100)"
-                        transform="rotate(-90,50,50)" />
-                <text x="50" y="55" font-size="15" fill="black" text-anchor="middle">
+                        :stroke-dashoffset="circumference - (circumference * progressPercentage / 100)"
+                        transform="rotate(-90 100 100)" />
+                <text x="100" y="105"
+                      font-size="30"
+                      fill="black"
+                      text-anchor="middle">
                     {{ Math.min(progressPercentage, 100).toFixed(0) }}%
                 </text>
             </svg>
 
-
-            <!-- Progress Bar -->
-            <!--<div style="background-color: lightgrey; width: 100%; height: 20px;">
-        <div :style="{backgroundColor: totalCalories>suggestedCalories ? 'red' : 'green', width: progressPercentage + '%', height: '100%'}">
-        </div>
-    </div>-->
-            <!--<div style="background-color: lightgrey; width: 100%; height: 20px;">
-        <div :style="{backgroundColor: totalCarbs > suggestedCarbs? 'red' : 'blue', width: progressPercentCarbs + '%', height: '100%'}">
-        </div>
-    </div>
-
-    <div style="background-color: lightgrey; width: 100%; height: 20px;">
-        <div :style="{backgroundColor: totalFat>suggestedFat? 'red' : 'orange', width: progressPercentFat + '%', height: '100%'}">
-        </div>
-    </div>
-
-    <div style="background-color: lightgrey; width: 100%; height: 20px;">
-        <div :style="{backgroundColor: totalProtein > suggestedProtein? 'red' : 'purple', width: progressPercentProtein + '%', height: '100%'}">
-        </div>
-    </div>-->
 
 
 
@@ -124,6 +86,30 @@
             <progress-bar label="Protein" :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>
             <progress-bar label="Carbs" :value="totalCarbs" :max="suggestedCarbs" color="orange"></progress-bar>
             <progress-bar label="Fat" :value="totalFat" :max="suggestedFat" color="purple"></progress-bar>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Measure</th>
+                        <th>Calories (kcal/100g)</th>
+                        <th>Proteins (g/100g)</th>
+                        <th>Carbohydrates (g/100g)</th>
+                        <th>Fat (g/100g)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="food in post" :key="food.name">
+                        <td>{{ food.name }}</td>
+                        <td>{{ food.measure }}</td>
+                        <td>{{ food.calories }}</td>
+                        <td>{{ food.protein }}</td>
+                        <td>{{ food.carbs }}</td>
+                        <td>{{ food.fat }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
         </div>
     </div>
@@ -184,7 +170,7 @@
                 return percentage > 100 ? 100 : percentage; // Cap the percentage at 100
             },
             circumference() {
-                const radius = 40; // Match the SVG circle's radius
+                const radius = 80; // Match the SVG circle's radius
                 return 2 * Math.PI * radius;
             }
         },

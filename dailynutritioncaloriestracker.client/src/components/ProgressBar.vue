@@ -42,6 +42,7 @@
 <style>
     .progress-container {
         width: 100%;
+        position: relative; /* Added this line */
         align-items: center;
         background-color: #eee;
         border-radius: 8px;
@@ -49,8 +50,12 @@
         margin: 10px 0;
     }
     .label {
-        margin-right: 10px;
-        /*Space between label and progress bar*/
+        position: absolute; /* Changed to absolute */
+        top: 0;
+        left: 0;
+        width: 100%; /* Ensure it spans the entire width */
+        text-align: center; /* Center the text horizontally */
+        z-index: 1; /* Ensure it's above the progress bar */        
     }
 
     .progress-bar {

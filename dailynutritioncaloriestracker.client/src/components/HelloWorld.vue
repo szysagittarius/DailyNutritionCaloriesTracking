@@ -74,12 +74,6 @@
                 Total Calories: {{ totalCalories.toFixed(2) }} kcal / {{ suggestedCalories }} kcal
             </div>
 
-            <!-- Progress Bar -->
-            <div style="background-color: lightgrey; width: 100%; height: 20px;">
-                <div :style="{backgroundColor: totalCalories>suggestedCalories ? 'red' : 'green', width: progressPercentage + '%', height: '100%'}">
-                </div>
-            </div>
-
             <!-- Circular Progress Indicator -->
             <svg width="100" height="100" viewBox="0 0 100 100">
                 <circle cx="50"
@@ -102,12 +96,38 @@
                     {{ Math.min(progressPercentage, 100).toFixed(0) }}%
                 </text>
             </svg>
+
+
+            <!-- Progress Bar -->
+            <div style="background-color: lightgrey; width: 100%; height: 20px;">
+                <div :style="{backgroundColor: totalCalories>suggestedCalories ? 'red' : 'green', width: progressPercentage + '%', height: '100%'}">
+                </div>
+            </div>
+
+
+
+            <div style="background-color: lightgrey; width: 100%; height: 20px;">
+                <div :style="{backgroundColor: totalCarbs > suggestedCarbs? 'red' : 'blue', width: progressPercentCarbs + '%', height: '100%'}">
+                </div>
+            </div>
+
+            <div style="background-color: lightgrey; width: 100%; height: 20px;">
+                <div :style="{backgroundColor: totalFat>suggestedFat? 'red' : 'orange', width: progressPercentFat + '%', height: '100%'}">
+                </div>
+            </div>
+
+            <div style="background-color: lightgrey; width: 100%; height: 20px;">
+                <div :style="{backgroundColor: totalProtein > suggestedProtein? 'red' : 'purple', width: progressPercentProtein + '%', height: '100%'}">
+                </div>
+            </div>
+
+
             <!-- Protein Progress Bar -->
-            <progress-bar :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>
+            <!--<progress-bar :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>-->
             <!-- Carbs Progress Bar -->
-            <progress-bar :value="totalCarbs" :max="suggestedCarbs" color="orange"></progress-bar>
+            <!--<progress-bar :value="totalCarbs" :max="suggestedCarbs" color="orange"></progress-bar>-->
             <!-- Fat Progress Bar -->
-            <progress-bar :value="totalFat" :max="suggestedFat" color="purple"></progress-bar>
+            <!--<progress-bar :value="totalFat" :max="suggestedFat" color="purple"></progress-bar>-->
         </div>
     </div>
 </template>
@@ -153,8 +173,16 @@
                 const percentage = (this.totalCalories / this.suggestedCalories) * 100;
                 return Math.min(percentage, 100); // Cap the percentage at 100% to avoid overflow
             },
-            progressPercent2() {
-                const percentage = (this.value / this.max) * 100;
+            progressPercentCarbs() {
+                const percentage = (this.totalCarbs / this.suggestedCarbs) * 100;
+                return percentage > 100 ? 100 : percentage; // Cap the percentage at 100
+            },
+            progressPercentFat() {
+                const percentage = (this.totalFat / this.suggestedFat) * 100;
+                return percentage > 100 ? 100 : percentage; // Cap the percentage at 100
+            },
+            progressPercentProtein() {
+                const percentage = (this.totalProtein / this.suggestedProtein) * 100;
                 return percentage > 100 ? 100 : percentage; // Cap the percentage at 100
             },
             circumference() {

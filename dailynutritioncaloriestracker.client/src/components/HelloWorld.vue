@@ -99,35 +99,32 @@
 
 
             <!-- Progress Bar -->
-            <div style="background-color: lightgrey; width: 100%; height: 20px;">
-                <div :style="{backgroundColor: totalCalories>suggestedCalories ? 'red' : 'green', width: progressPercentage + '%', height: '100%'}">
-                </div>
-            </div>
+            <!--<div style="background-color: lightgrey; width: 100%; height: 20px;">
+        <div :style="{backgroundColor: totalCalories>suggestedCalories ? 'red' : 'green', width: progressPercentage + '%', height: '100%'}">
+        </div>
+    </div>-->
+            <!--<div style="background-color: lightgrey; width: 100%; height: 20px;">
+        <div :style="{backgroundColor: totalCarbs > suggestedCarbs? 'red' : 'blue', width: progressPercentCarbs + '%', height: '100%'}">
+        </div>
+    </div>
+
+    <div style="background-color: lightgrey; width: 100%; height: 20px;">
+        <div :style="{backgroundColor: totalFat>suggestedFat? 'red' : 'orange', width: progressPercentFat + '%', height: '100%'}">
+        </div>
+    </div>
+
+    <div style="background-color: lightgrey; width: 100%; height: 20px;">
+        <div :style="{backgroundColor: totalProtein > suggestedProtein? 'red' : 'purple', width: progressPercentProtein + '%', height: '100%'}">
+        </div>
+    </div>-->
 
 
 
-            <div style="background-color: lightgrey; width: 100%; height: 20px;">
-                <div :style="{backgroundColor: totalCarbs > suggestedCarbs? 'red' : 'blue', width: progressPercentCarbs + '%', height: '100%'}">
-                </div>
-            </div>
+            <progress-bar label="Calories" :value="totalCalories" :max="suggestedCalories" color="green"></progress-bar>
+            <progress-bar label="Protein" :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>
+            <progress-bar label="Carbs" :value="totalCarbs" :max="suggestedCarbs" color="orange"></progress-bar>
+            <progress-bar label="Fat" :value="totalFat" :max="suggestedFat" color="purple"></progress-bar>
 
-            <div style="background-color: lightgrey; width: 100%; height: 20px;">
-                <div :style="{backgroundColor: totalFat>suggestedFat? 'red' : 'orange', width: progressPercentFat + '%', height: '100%'}">
-                </div>
-            </div>
-
-            <div style="background-color: lightgrey; width: 100%; height: 20px;">
-                <div :style="{backgroundColor: totalProtein > suggestedProtein? 'red' : 'purple', width: progressPercentProtein + '%', height: '100%'}">
-                </div>
-            </div>
-
-
-            <!-- Protein Progress Bar -->
-            <!--<progress-bar :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>-->
-            <!-- Carbs Progress Bar -->
-            <!--<progress-bar :value="totalCarbs" :max="suggestedCarbs" color="orange"></progress-bar>-->
-            <!-- Fat Progress Bar -->
-            <!--<progress-bar :value="totalFat" :max="suggestedFat" color="purple"></progress-bar>-->
         </div>
     </div>
 </template>
@@ -169,6 +166,7 @@
             totalFat() {
                 return this.entries.reduce((total, entry) => total + entry.fat, 0);
             },
+
             progressPercentage() {
                 const percentage = (this.totalCalories / this.suggestedCalories) * 100;
                 return Math.min(percentage, 100); // Cap the percentage at 100% to avoid overflow

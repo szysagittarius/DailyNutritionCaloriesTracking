@@ -28,7 +28,7 @@
     <ProjectReference Include="..\dailynutritioncaloriestracker.client\dailynutritioncaloriestracker.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\DNCT.Database\NT.Database.csproj" />
+    <ProjectReference Include="..\DNCT.Database\NT.Ef.Database.csproj" />
   </ItemGroup>
 
   <ItemGroup>

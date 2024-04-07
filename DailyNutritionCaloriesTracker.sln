@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyNutritionCaloriesTrack
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dailynutritioncaloriestracker.client", "dailynutritioncaloriestracker.client\dailynutritioncaloriestracker.client.esproj", "{E52A59BF-98E8-4C82-A785-0B26911CBF83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Database", "DNCT.Database\NT.Database.csproj", "{CD44DE41-9110-4007-99A9-5E6D5617A8CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Ef.Database", "DNCT.Database\NT.Ef.Database.csproj", "{CD44DE41-9110-4007-99A9-5E6D5617A8CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Ef.Repositories", "NT.Repositories\NT.Ef.Repositories.csproj", "{A86427C5-1BBA-4566-A08F-8759C10CC3D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Application", "NT.Application\NT.Application.csproj", "{73B962AC-1790-4773-B631-BDB81DABB324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Application.Contracts", "NT.Application.Contracts\NT.Application.Contracts.csproj", "{A56717A2-332F-4D43-9917-C77C0BDF847A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +35,18 @@ Global
 		{CD44DE41-9110-4007-99A9-5E6D5617A8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD44DE41-9110-4007-99A9-5E6D5617A8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD44DE41-9110-4007-99A9-5E6D5617A8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86427C5-1BBA-4566-A08F-8759C10CC3D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86427C5-1BBA-4566-A08F-8759C10CC3D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86427C5-1BBA-4566-A08F-8759C10CC3D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86427C5-1BBA-4566-A08F-8759C10CC3D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B962AC-1790-4773-B631-BDB81DABB324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B962AC-1790-4773-B631-BDB81DABB324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B962AC-1790-4773-B631-BDB81DABB324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B962AC-1790-4773-B631-BDB81DABB324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

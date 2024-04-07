@@ -22,3 +22,15 @@ A web application inspired by the Microsoft To-Do app that helps users track the
 - Backend: .NET, Azure SQL Database/AWS RDS, Azure AD for authentication
 - Frontend: HTML5, CSS3, JavaScript (AJAX for dynamic data fetching)
 - Data Analysis: Potential future integration with data mining tools
+
+
+## Database update
+- To update the database,
+- Need to install the EF Core design package in both the server and database projects.
+- run the following command in the Package Manager Console:
+```
+dotnet tool install --global dotnet-ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+DailyNutritionCaloriesTracker\DailyNutritionCaloriesTracker.Server> dotnet ef migrations add InitialCreate --project ..\DNCT.Database\NT.Database.csproj
+DailyNutritionCaloriesTracker\DailyNutritionCaloriesTracker.Server> dotnet ef database update --project ..\DNCT.Database\NT.Database.csproj
+```

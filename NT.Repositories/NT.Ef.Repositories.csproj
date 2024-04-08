@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <ProjectReference Include="..\DNCT.Database\NT.Ef.Database.csproj" />
+    <ProjectReference Include="..\NT.Application.Contracts\NT.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

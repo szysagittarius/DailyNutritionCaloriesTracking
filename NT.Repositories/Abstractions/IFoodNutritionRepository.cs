@@ -2,6 +2,6 @@
 
 namespace NT.Ef.Repositories.Abstractions;
 
-internal interface IFoodNutritionRepository : IBaseRepository<FoodNutrition>
+public interface IFoodNutritionRepository : IBaseRepository<FoodNutrition>
 {
 }

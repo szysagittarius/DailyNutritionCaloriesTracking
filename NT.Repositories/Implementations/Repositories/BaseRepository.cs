@@ -19,7 +19,7 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
         return entity;
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Guid id)
     {
         TEntity? entity = await dbContext.Set<TEntity>().FindAsync(id);
         if (entity != null)
@@ -34,7 +34,7 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
         return dbContext.Set<TEntity>().AsQueryable();
     }
 
-    public async Task<TEntity> GetByIdAsync(int id)
+    public async Task<TEntity> GetByIdAsync(Guid id)
     {
         return await dbContext.Set<TEntity>().FindAsync(id);
     }

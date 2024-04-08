@@ -1,6 +1,6 @@
 namespace NT.Application.Contracts.Entities;
 
-public class FoodNutrition
+public class FoodNutritionEntity : EntityBase
 {
     public required string Name { get; set; }
     public required string Measurement { get; set; }

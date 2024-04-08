@@ -1,12 +1,12 @@
 ﻿namespace NT.Application.Contracts.Entities;
-public class User
+public class UserEntity : EntityBase
 {
-    public Guid Id { get; private set; }
+    public new Guid Id { get; private set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
     private string password;
 
-    public User(Guid id, string name, string email, string password)
+    public UserEntity(Guid id, string name, string email, string password)
     {
         if (id == Guid.Empty)
         {

@@ -1,5 +1,8 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NT.Application.Contracts.Entities;
+using NT.Application.Contracts.Ports;
 
 namespace DailyNutritionCaloriesTracker.Server.Controllers;
 
@@ -9,10 +12,16 @@ public class FoodNutritionController : ControllerBase
 {
 
     private readonly ILogger<FoodNutritionController> _logger;
+    private readonly IFoodNutritionDataHandler _foodNutritionService;
+    private readonly IMapper _mapper;
 
-    public FoodNutritionController(ILogger<FoodNutritionController> logger)
+    public FoodNutritionController(ILogger<FoodNutritionController> logger,
+        IFoodNutritionDataHandler foodNutritionService,
+        IMapper mapper)
     {
         _logger = logger;
+        _foodNutritionService = foodNutritionService;
+        _mapper = mapper;
     }
 
     [HttpGet(Name = "GetFoodNutrition")]
@@ -33,11 +42,22 @@ public class FoodNutritionController : ControllerBase
         {
             FoodNutritionDto foodNutrition = kvp.Value;
             foodNutrition.Name = kvp.Key;
-            foodNutrition.Measure = "per 100g";
+            foodNutrition.Measurement = "per 100g";
             return foodNutrition;
         }).ToList();
 
+        //Imapper map the list of FoodNutritionDto to list of FoodNutritionEntity
+        List<FoodNutritionEntity> foodNutritionEntities = _mapper.Map<List<FoodNutritionEntity>>(foodNutritionList);
+
+
+        //add the list of FoodNutritionEntity to the database
+        foreach (FoodNutritionEntity foodNutrition in foodNutritionEntities)
+        {
+            _foodNutritionService.AddAsync(foodNutrition);
+        }
 
         return foodNutritionList;
     }
+
+
 }

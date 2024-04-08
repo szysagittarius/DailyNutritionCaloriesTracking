@@ -1,14 +1,14 @@
 ﻿namespace NT.Application.Contracts.Entities;
-public class FoodLog
+public class FoodLogEntity : EntityBase
 {
-    public Guid Id { get; private set; }
+    public new Guid Id { get; private set; }
     public DateTime DateTime { get; private set; }
     public DateTime CreateTime { get; private set; }
     public DateTime UpdateTime { get; private set; }
     public Guid UserId { get; private set; }
-    public User User { get; private set; } // Assuming User is also refactored to a domain model
+    public UserEntity User { get; private set; } // Assuming User is also refactored to a domain model
 
-    public FoodLog(Guid id, DateTime dateTime, Guid userId, User user)
+    public FoodLogEntity(Guid id, DateTime dateTime, Guid userId, UserEntity user)
     {
         if (id == Guid.Empty)
         {

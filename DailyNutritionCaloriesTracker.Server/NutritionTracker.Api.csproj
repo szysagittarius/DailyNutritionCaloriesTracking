@@ -29,6 +29,9 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\DNCT.Database\NT.Ef.Database.csproj" />
+    <ProjectReference Include="..\NT.Application.Contracts\NT.Application.Contracts.csproj" />
+    <ProjectReference Include="..\NT.Application\NT.Application.csproj" />
+    <ProjectReference Include="..\NT.Repositories\NT.Ef.Repositories.csproj" />
   </ItemGroup>
 
   <ItemGroup>

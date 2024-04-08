@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NT.Application.Contracts.Entities;
 using NT.Application.Contracts.Ports;
+using NT.Database.Entities;
 using NT.Ef.Repositories.Abstractions;
 
 namespace NT.Ef.Repositories.Implementations.DataHandlers;
@@ -15,33 +16,41 @@ public class FoodLogDataHandler : IFoodLogDataHandler
         _mapper = mapper;
     }
 
-    public Task<FoodLog> AddFoodLogAsync(FoodLog foodLog)
+    public async Task<FoodLogEntity> AddAsync(FoodLogEntity foodLog)
     {
-        throw new NotImplementedException();
+        FoodLog foodLogModel = _mapper.Map<FoodLog>(foodLog);
+        FoodLog addedFoodLog = await _foodLogRepository.AddAsync(foodLogModel);
+        return _mapper.Map<FoodLogEntity>(addedFoodLog);
     }
 
-    public Task DeleteFoodLogAsync(Guid id)
+    public async Task DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        await _foodLogRepository.DeleteAsync(id); // Example conversion, adjust based on actual ID handling
     }
 
-    public Task<FoodLog> GetFoodLogAsync(Guid id)
+    public async Task<FoodLogEntity> GetAsync(Guid id)
     {
-        throw new NotImplementedException();
+        FoodLog foodLog = await _foodLogRepository.GetByIdAsync(id); // Adjust ID conversion as necessary
+        return _mapper.Map<FoodLogEntity>(foodLog);
     }
 
-    public Task<IEnumerable<FoodLog>> GetFoodLogsAsync()
+    public async Task<IEnumerable<FoodLogEntity>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        List<FoodLog> foodLogs = await Task.FromResult(_foodLogRepository.GetAll().ToList());
+        return _mapper.Map<IEnumerable<FoodLogEntity>>(foodLogs);
     }
 
-    public Task<IEnumerable<FoodLog>> GetFoodLogsAsync(Guid userId)
+    public async Task<IEnumerable<FoodLogEntity>> GetAllAsync(Guid userId)
     {
-        throw new NotImplementedException();
+        // Assuming there's a way to filter by userId in your repository
+        List<FoodLog> foodLogs = _foodLogRepository.GetAll().Where(f => f.UserId == userId).ToList();
+        return await Task.FromResult(_mapper.Map<IEnumerable<FoodLogEntity>>(foodLogs));
     }
 
-    public Task<FoodLog> UpdateFoodLogAsync(FoodLog foodLog)
+    public async Task<FoodLogEntity> UpdateAsync(FoodLogEntity foodLog)
     {
-        throw new NotImplementedException();
+        FoodLog foodLogModel = _mapper.Map<FoodLog>(foodLog);
+        FoodLog updatedFoodLog = await _foodLogRepository.UpdateAsync(foodLogModel);
+        return _mapper.Map<FoodLogEntity>(updatedFoodLog);
     }
 }

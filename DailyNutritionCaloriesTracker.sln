@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyNutritionCaloriesTracker.Server", "DailyNutritionCaloriesTracker.Server\DailyNutritionCaloriesTracker.Server.csproj", "{22655E00-9297-4938-B2DB-B3331195460D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutritionTracker.Api", "DailyNutritionCaloriesTracker.Server\NutritionTracker.Api.csproj", "{22655E00-9297-4938-B2DB-B3331195460D}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dailynutritioncaloriestracker.client", "dailynutritioncaloriestracker.client\dailynutritioncaloriestracker.client.esproj", "{E52A59BF-98E8-4C82-A785-0B26911CBF83}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "NutritionTracker.Web", "dailynutritioncaloriestracker.client\NutritionTracker.Web.esproj", "{E52A59BF-98E8-4C82-A785-0B26911CBF83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Ef.Database", "DNCT.Database\NT.Ef.Database.csproj", "{CD44DE41-9110-4007-99A9-5E6D5617A8CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Ef.Database", "DNCT.Database\NT.Ef.Database.csproj", "{CD44DE41-9110-4007-99A9-5E6D5617A8CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Ef.Repositories", "NT.Repositories\NT.Ef.Repositories.csproj", "{A86427C5-1BBA-4566-A08F-8759C10CC3D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Ef.Repositories", "NT.Repositories\NT.Ef.Repositories.csproj", "{A86427C5-1BBA-4566-A08F-8759C10CC3D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Application", "NT.Application\NT.Application.csproj", "{73B962AC-1790-4773-B631-BDB81DABB324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Application", "NT.Application\NT.Application.csproj", "{73B962AC-1790-4773-B631-BDB81DABB324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NT.Application.Contracts", "NT.Application.Contracts\NT.Application.Contracts.csproj", "{A56717A2-332F-4D43-9917-C77C0BDF847A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Application.Contracts", "NT.Application.Contracts\NT.Application.Contracts.csproj", "{A56717A2-332F-4D43-9917-C77C0BDF847A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

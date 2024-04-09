@@ -1,0 +1,92 @@
+{
+    "Egg": {
+        "Carbohydrates (g/100g)": 0.72,
+        "Fat (g/100g)": 9.51,
+        "Proteins (g/100g)": 12.56,
+        "Calories (kcal/100g)": 143.48
+    },
+    "Pork Floss": {
+        "Carbohydrates (g/100g)": 1.0,
+        "Fat (g/100g)": 20.0,
+        "Proteins (g/100g)": 55.0,
+        "Calories (kcal/100g)": 505.0
+    },
+    "Kale": {
+        "Carbohydrates (g/100g)": 8.75,
+        "Fat (g/100g)": 1.49,
+        "Proteins (g/100g)": 4.28,
+        "Calories (kcal/100g)": 49.12
+    },
+    "Sausage": {
+        "Carbohydrates (g/100g)": 1.43,
+        "Fat (g/100g)": 31.84,
+        "Proteins (g/100g)": 19.27,
+        "Calories (kcal/100g)": 350.49
+    },
+    "Blueberry": {
+        "Carbohydrates (g/100g)": 14.49,
+        "Fat (g/100g)": 0.33,
+        "Proteins (g/100g)": 0.74,
+        "Calories (kcal/100g)": 57.96
+    },
+    "Carrot": {
+        "Carbohydrates (g/100g)": 9.58,
+        "Fat (g/100g)": 0.24,
+        "Proteins (g/100g)": 0.93,
+        "Calories (kcal/100g)": 41.12
+    },
+    "Walnut": {
+        "Carbohydrates (g/100g)": 13.71,
+        "Fat (g/100g)": 65.21,
+        "Proteins (g/100g)": 15.23,
+        "Calories (kcal/100g)": 654.25
+    },
+    "Chia Seeds": {
+        "Carbohydrates (g/100g)": 42.12,
+        "Fat (g/100g)": 30.74,
+        "Proteins (g/100g)": 16.54,
+        "Calories (kcal/100g)": 486.7
+    },
+    "Beet": {
+        "Carbohydrates (g/100g)": 9.56,
+        "Fat (g/100g)": 0.17,
+        "Proteins (g/100g)": 1.61,
+        "Calories (kcal/100g)": 43.06
+    },
+    "Celery": {
+        "Carbohydrates (g/100g)": 2.97,
+        "Fat (g/100g)": 0.17,
+        "Proteins (g/100g)": 0.69,
+        "Calories (kcal/100g)": 16.25
+    },
+    "Almond": {
+        "Carbohydrates (g/100g)": 21.55,
+        "Fat (g/100g)": 49.93,
+        "Proteins (g/100g)": 21.15,
+        "Calories (kcal/100g)": 575.49
+    },
+    "Salmon": {
+        "Carbohydrates (g/100g)": 0.0,
+        "Fat (g/100g)": 13.42,
+        "Proteins (g/100g)": 20.42,
+        "Calories (kcal/100g)": 208.22
+    },
+    "Crown Daisy": {
+        "Carbohydrates (g/100g)": 4.1,
+        "Fat (g/100g)": 0.7,
+        "Proteins (g/100g)": 1.5,
+        "Calories (kcal/100g)": 29.6
+    },
+    "Minced Meat": {
+        "Carbohydrates (g/100g)": 0.0,
+        "Fat (g/100g)": 20.0,
+        "Proteins (g/100g)": 14.0,
+        "Calories (kcal/100g)": 260.0
+    },
+    "Eggplant": {
+        "Carbohydrates (g/100g)": 5.88,
+        "Fat (g/100g)": 0.18,
+        "Proteins (g/100g)": 0.98,
+        "Calories (kcal/100g)": 24.66
+    }
+}

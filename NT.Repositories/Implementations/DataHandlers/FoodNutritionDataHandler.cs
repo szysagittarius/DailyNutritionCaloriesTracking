@@ -82,14 +82,15 @@ public class FoodNutritionDataHandler : IFoodNutritionDataHandler
 
     public async Task<FoodNutritionEntity> UpdateAsync(FoodNutritionEntity foodNutrition)
     {
-        FoodNutrition existingModel = await _foodNutritionRepository.GetByIdAsync(foodNutrition.Id);
-        if (existingModel == null)
-        {
-            throw new KeyNotFoundException($"No food nutrition found with ID: {foodNutrition.Id}");
-        }
+        throw new NotImplementedException();
+        //FoodNutrition existingModel = await _foodNutritionRepository.GetByIdAsync(foodNutrition.Id);
+        //if (existingModel == null)
+        //{
+        //    throw new KeyNotFoundException($"No food nutrition found with ID: {foodNutrition.Id}");
+        //}
 
-        _mapper.Map(foodNutrition, existingModel);
-        FoodNutrition updatedModel = await _foodNutritionRepository.UpdateAsync(existingModel);
-        return _mapper.Map<FoodNutritionEntity>(updatedModel);
+        //_mapper.Map(foodNutrition, existingModel);
+        //FoodNutrition updatedModel = await _foodNutritionRepository.UpdateAsync(existingModel);
+        //return _mapper.Map<FoodNutritionEntity>(updatedModel);
     }
 }

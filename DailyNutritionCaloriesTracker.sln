@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Application", "NT.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Application.Contracts", "NT.Application.Contracts\NT.Application.Contracts.csproj", "{A56717A2-332F-4D43-9917-C77C0BDF847A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionTracker.Api.Tests", "Tests\NutritionTracker.Api.Tests\NutritionTracker.Api.Tests.csproj", "{B237D057-96B4-4EE4-8995-7104CD1F36F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A56717A2-332F-4D43-9917-C77C0BDF847A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B237D057-96B4-4EE4-8995-7104CD1F36F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B237D057-96B4-4EE4-8995-7104CD1F36F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B237D057-96B4-4EE4-8995-7104CD1F36F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B237D057-96B4-4EE4-8995-7104CD1F36F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

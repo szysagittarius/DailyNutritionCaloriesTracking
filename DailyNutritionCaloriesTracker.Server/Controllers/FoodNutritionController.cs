@@ -41,23 +41,62 @@ public class FoodNutritionController : ControllerBase
         List<FoodNutritionDto> foodNutritionList = foodNutritionDictionary.Select(kvp =>
         {
             FoodNutritionDto foodNutrition = kvp.Value;
+            //foodNutrition.Id = Guid.NewGuid();
             foodNutrition.Name = kvp.Key;
             foodNutrition.Measurement = "per 100g";
             return foodNutrition;
         }).ToList();
 
         //Imapper map the list of FoodNutritionDto to list of FoodNutritionEntity
-        List<FoodNutritionEntity> foodNutritionEntities = _mapper.Map<List<FoodNutritionEntity>>(foodNutritionList);
+        List<FoodNutritionEntity> foodNutritionEntities = new List<FoodNutritionEntity>();
+        
+        foreach (FoodNutritionDto foodNutrition in foodNutritionList)
+        {
+            //FoodNutritionEntity foodNutritionEntity = _mapper.Map<FoodNutritionEntity>(foodNutrition);
+
+            var foodNutritionEntity = MapDtoToEntity(foodNutrition);
+            foodNutritionEntities.Add(foodNutritionEntity);
+        }
 
 
         //add the list of FoodNutritionEntity to the database
-        foreach (FoodNutritionEntity foodNutrition in foodNutritionEntities)
-        {
-            _foodNutritionService.AddAsync(foodNutrition);
-        }
+        //foreach (FoodNutritionEntity foodNutrition in foodNutritionEntities)
+        //{
+        //    _foodNutritionService.AddAsync(foodNutrition);
+        //}
 
         return foodNutritionList;
     }
 
+    private FoodNutritionEntity MapDtoToEntity(FoodNutritionDto dto)
+    {
+        var entity = new FoodNutritionEntity
+        {
+            // Assuming Id is generated elsewhere or not needed in this context
+            Name = dto.Name,
+            Measurement = dto.Measurement,
+            Calories = dto.Calories,
+            Protein = dto.Protein,
+            Carbs = dto.Carbs,
+            Fat = dto.Fat
+        };
+
+        return entity;
+    }
+
+    private FoodNutritionDto MapEntityToDto(FoodNutritionEntity entity)
+    {
+        var dto = new FoodNutritionDto
+        {
+            Name = entity.Name,
+            Measurement = entity.Measurement,
+            Calories = entity.Calories,
+            Protein = entity.Protein,
+            Carbs = entity.Carbs,
+            Fat = entity.Fat
+        };
+
+        return dto;
+    }
 
 }

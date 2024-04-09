@@ -60,10 +60,10 @@ public class FoodNutritionController : ControllerBase
 
 
         //add the list of FoodNutritionEntity to the database
-        //foreach (FoodNutritionEntity foodNutrition in foodNutritionEntities)
-        //{
-        //    _foodNutritionService.AddAsync(foodNutrition);
-        //}
+        foreach (FoodNutritionEntity foodNutrition in foodNutritionEntities)
+        {
+            _foodNutritionService.AddAsync(foodNutrition);
+        }
 
         return foodNutritionList;
     }

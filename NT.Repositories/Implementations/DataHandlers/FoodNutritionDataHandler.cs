@@ -18,6 +18,16 @@ public class FoodNutritionDataHandler : IFoodNutritionDataHandler
     public async Task<FoodNutritionEntity> AddAsync(FoodNutritionEntity foodNutrition)
     {
         FoodNutrition model = _mapper.Map<FoodNutrition>(foodNutrition);
+
+        //check foodNutrition by name, if it already exists, skip adding it
+        FoodNutrition? existingModel = _foodNutritionRepository.GetAll()
+            .FirstOrDefault(fn => fn.Name.Equals(foodNutrition.Name, StringComparison.OrdinalIgnoreCase));
+
+        if (existingModel != null)
+        {
+            return _mapper.Map<FoodNutritionEntity>(existingModel);
+        }
+
         FoodNutrition addedModel = await _foodNutritionRepository.AddAsync(model);
         return _mapper.Map<FoodNutritionEntity>(addedModel);
     }

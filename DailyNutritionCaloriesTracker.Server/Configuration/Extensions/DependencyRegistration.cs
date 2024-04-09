@@ -24,7 +24,6 @@ public static class DependencyRegistration
         services.AddSingleton(dtoMapper);
 
 
-        //services.AddAutoMapper(typeof(FoodNutritionDtoProfiler));
 
         services.RegisterApplicationServices();
 

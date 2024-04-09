@@ -17,13 +17,14 @@ public class FoodNutritionDtoProfiler : Profile
             .ForMember(dto => dto.Fat, opt => opt.MapFrom(entity => entity.Fat));
 
         // Reverse mapping from DTO to Entity, mapping each property explicitly
-        CreateMap<FoodNutritionDto, FoodNutritionEntity>()
+        CreateMap<FoodNutritionDto, NT.Application.Contracts.Entities.FoodNutritionEntity>()
             .ForMember(entity => entity.Name, opt => opt.MapFrom(dto => dto.Name))
             .ForMember(entity => entity.Measurement, opt => opt.MapFrom(dto => dto.Measurement))
             .ForMember(entity => entity.Calories, opt => opt.MapFrom(dto => dto.Calories))
             .ForMember(entity => entity.Protein, opt => opt.MapFrom(dto => dto.Protein))
             .ForMember(entity => entity.Carbs, opt => opt.MapFrom(dto => dto.Carbs))
             .ForMember(entity => entity.Fat, opt => opt.MapFrom(dto => dto.Fat));
+
         // Explicitly ignore the Id property since it's not present in the DTO
         // This line is optional depending on whether you have properties in the Entity not present in the DTO
         //.ForMember(entity => entity.Id, opt => opt.Ignore());

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NT.Application.Contracts.Entities;
 using NT.Application.Contracts.Ports;
+using NT.Application.Services.Abstractions;
 
 namespace DailyNutritionCaloriesTracker.Server.Controllers;
 
@@ -12,11 +13,11 @@ public class FoodNutritionController : ControllerBase
 {
 
     private readonly ILogger<FoodNutritionController> _logger;
-    private readonly IFoodNutritionDataHandler _foodNutritionService;
+    private readonly IFoodNutritionService _foodNutritionService;
     private readonly IMapper _mapper;
 
     public FoodNutritionController(ILogger<FoodNutritionController> logger,
-        IFoodNutritionDataHandler foodNutritionService,
+        IFoodNutritionService foodNutritionService,
         IMapper mapper)
     {
         _logger = logger;
@@ -25,13 +26,13 @@ public class FoodNutritionController : ControllerBase
     }
 
     [HttpGet(Name = "GetFoodNutrition")]
-    public IEnumerable<FoodNutritionDto> Get()
+    public async Task<IEnumerable<FoodNutritionDto>> GetAsync()
     {
-        return LoadData();
+        return await LoadDataAsync();
     }
 
     //if this changes to public, it will mess up the swagger documentation
-    private IEnumerable<FoodNutritionDto> LoadData()
+    private async Task<IEnumerable<FoodNutritionDto>> LoadDataAsync()
     {
         //load data from json file, under App_data folder in the project
         string json = System.IO.File.ReadAllText("App_Data/food_nutritional_values.json");
@@ -49,20 +50,29 @@ public class FoodNutritionController : ControllerBase
 
         //Imapper map the list of FoodNutritionDto to list of FoodNutritionEntity
         List<FoodNutritionEntity> foodNutritionEntities = new List<FoodNutritionEntity>();
-        
-        foreach (FoodNutritionDto foodNutrition in foodNutritionList)
-        {
-            //FoodNutritionEntity foodNutritionEntity = _mapper.Map<FoodNutritionEntity>(foodNutrition);
 
-            var foodNutritionEntity = MapDtoToEntity(foodNutrition);
-            foodNutritionEntities.Add(foodNutritionEntity);
+        try
+        {
+            foreach (FoodNutritionDto foodNutrition in foodNutritionList)
+            {
+                //FoodNutritionEntity foodNutritionEntity = _mapper.Map<FoodNutritionEntity>(foodNutrition);
+
+                var foodNutritionEntity = MapDtoToEntity(foodNutrition);
+                foodNutritionEntities.Add(foodNutritionEntity);
+            }
         }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+
 
 
         //add the list of FoodNutritionEntity to the database
         foreach (FoodNutritionEntity foodNutrition in foodNutritionEntities)
         {
-            _foodNutritionService.AddAsync(foodNutrition);
+            await _foodNutritionService.AddFoodNutritionAsync(foodNutrition);
         }
 
         return foodNutritionList;

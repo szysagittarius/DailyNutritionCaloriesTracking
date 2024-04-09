@@ -20,16 +20,28 @@ public class FoodNutritionDataHandler : IFoodNutritionDataHandler
         FoodNutrition model = _mapper.Map<FoodNutrition>(foodNutrition);
 
         //check foodNutrition by name, if it already exists, skip adding it
-        FoodNutrition? existingModel = _foodNutritionRepository.GetAll()
-            .FirstOrDefault(fn => fn.Name.Equals(foodNutrition.Name, StringComparison.OrdinalIgnoreCase));
-
-        if (existingModel != null)
+        try
         {
-            return _mapper.Map<FoodNutritionEntity>(existingModel);
-        }
+            //FoodNutrition? existingModel = _foodNutritionRepository.GetAll()
+            //.FirstOrDefault(fn => fn.Name.ToLower().Equals(foodNutrition.Name.ToLower()));
 
-        FoodNutrition addedModel = await _foodNutritionRepository.AddAsync(model);
-        return _mapper.Map<FoodNutritionEntity>(addedModel);
+            //if (existingModel != null)
+            //{
+            //    return _mapper.Map<FoodNutritionEntity>(existingModel);
+            //}
+
+            FoodNutrition addedModel = await _foodNutritionRepository.AddAsync(model);
+            return _mapper.Map<FoodNutritionEntity>(addedModel);
+
+        }
+        catch (Exception ex)
+        {
+
+            throw new Exception(ex.Message);
+        }
+        
+
+       
     }
 
     public async Task DeleteAsync(string foodName)

@@ -1,7 +1,7 @@
 ﻿using NT.Application.Contracts.Entities;
 
 namespace NT.Application.Services.Abstractions;
-internal interface IFoodLogService
+public interface IFoodLogService
 {
     //get, delete, update, add
     Task<FoodLogEntity> GetAsync(Guid id);

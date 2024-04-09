@@ -3,6 +3,7 @@ using NT.Application.Contracts.Ports;
 using NT.Application.Services.Abstractions;
 
 namespace NT.Application.Services.Implementations;
+
 internal class FoodLogService : IFoodLogService
 {
     private readonly IFoodLogDataHandler _foodLogDataHandler;

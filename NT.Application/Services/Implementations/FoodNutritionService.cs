@@ -16,24 +16,51 @@ internal class FoodNutritionService : IFoodNutritionService
     }
     public async Task<FoodNutritionEntity> AddFoodNutritionAsync(FoodNutritionEntity foodNutrition)
     {
-        FoodNutritionEntity result = await _foodNutritionDataHandler.AddAsync(foodNutrition);
-        await _unitOfWork.CommitAsync();
-        return result;
+        await _unitOfWork.BeginTransactionAsync(); // Start the transaction
+        try
+        {
+            FoodNutritionEntity result = await _foodNutritionDataHandler.AddAsync(foodNutrition);
+            await _unitOfWork.CommitAsync(); // Commit the transaction
+            return result;
+        }
+        catch
+        {
+            await _unitOfWork.RollbackAsync(); // Rollback on error
+            throw; // Re-throw the exception to handle it further up the call stack
+        }
     }
 
     public async Task DeleteFoodNutritionAsync(string foodName)
     {
-        await _foodNutritionDataHandler.DeleteAsync(foodName);
-        await _unitOfWork.CommitAsync();
+        await _unitOfWork.BeginTransactionAsync(); // Start the transaction
+        try
+        {
+            await _foodNutritionDataHandler.DeleteAsync(foodName);
+            await _unitOfWork.CommitAsync(); // Commit the transaction
+        }
+        catch
+        {
+            await _unitOfWork.RollbackAsync(); // Rollback on error
+            throw; // Re-throw the exception to handle it further up the call stack
+        }
     }
 
     public async Task DeleteFoodNutritionAsync(IEnumerable<string> foodNames)
     {
-        foreach (string foodName in foodNames)
+        await _unitOfWork.BeginTransactionAsync(); // Start the transaction
+        try
         {
-            await _foodNutritionDataHandler.DeleteAsync(foodName);
+            foreach (string foodName in foodNames)
+            {
+                await _foodNutritionDataHandler.DeleteAsync(foodName);
+            }
+            await _unitOfWork.CommitAsync(); // Commit the transaction
         }
-        await _unitOfWork.CommitAsync();
+        catch
+        {
+            await _unitOfWork.RollbackAsync(); // Rollback on error
+            throw; // Re-throw the exception to handle it further up the call stack
+        }
     }
 
     public Task DeleteFoodNutritionAsync()

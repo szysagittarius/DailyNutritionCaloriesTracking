@@ -17,24 +17,51 @@ internal class FoodLogService : IFoodLogService
 
     public async Task<FoodLogEntity> AddAsync(FoodLogEntity foodLog)
     {
-        FoodLogEntity result = await _foodLogDataHandler.AddAsync(foodLog);
-        await _unitOfWork.CommitAsync();
-        return result;
+        await _unitOfWork.BeginTransactionAsync();  // Start the transaction
+        try
+        {
+            FoodLogEntity result = await _foodLogDataHandler.AddAsync(foodLog);
+            await _unitOfWork.CommitAsync();  // Commit the transaction
+            return result;
+        }
+        catch
+        {
+            await _unitOfWork.RollbackAsync();  // Rollback on error
+            throw;
+        }
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        await _foodLogDataHandler.DeleteAsync(id);
-        await _unitOfWork.CommitAsync();
+        await _unitOfWork.BeginTransactionAsync();  // Start the transaction
+        try
+        {
+            await _foodLogDataHandler.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();  // Commit the transaction
+        }
+        catch
+        {
+            await _unitOfWork.RollbackAsync();  // Rollback on error
+            throw;
+        }
     }
 
     public async Task DeleteAsync(IEnumerable<Guid> ids)
     {
-        foreach (Guid id in ids)
+        await _unitOfWork.BeginTransactionAsync();  // Start the transaction
+        try
         {
-            await _foodLogDataHandler.DeleteAsync(id);
+            foreach (Guid id in ids)
+            {
+                await _foodLogDataHandler.DeleteAsync(id);
+            }
+            await _unitOfWork.CommitAsync();  // Commit the transaction
         }
-        await _unitOfWork.CommitAsync();
+        catch
+        {
+            await _unitOfWork.RollbackAsync();  // Rollback on error
+            throw;
+        }
     }
 
     public Task DeleteAsync()
@@ -59,8 +86,17 @@ internal class FoodLogService : IFoodLogService
 
     public async Task<FoodLogEntity> UpdateAsync(FoodLogEntity foodLog)
     {
-        FoodLogEntity result = await _foodLogDataHandler.UpdateAsync(foodLog);
-        await _unitOfWork.CommitAsync();
-        return result;
+        await _unitOfWork.BeginTransactionAsync();  // Start the transaction
+        try
+        {
+            FoodLogEntity result = await _foodLogDataHandler.UpdateAsync(foodLog);
+            await _unitOfWork.CommitAsync();  // Commit the transaction
+            return result;
+        }
+        catch
+        {
+            await _unitOfWork.RollbackAsync();  // Rollback on error
+            throw;
+        }
     }
 }

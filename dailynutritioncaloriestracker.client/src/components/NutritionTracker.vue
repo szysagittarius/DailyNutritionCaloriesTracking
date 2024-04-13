@@ -19,68 +19,12 @@
             <progress-bar label="Fat" :value="totalFat" :max="suggestedFat" color="purple"></progress-bar>
             <progress-bar label="Protein" :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Food Item</th>
-                        <th>Serve Amount (g)</th>
-                        <th>Total Carbs</th>
-                        <th>Total Fat</th>
-                        <th>Total Protein</th>
-                        <th>Total Calories</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(entry, index) in entries" :key="index">
-                        <td>
-                            <input type="text"
-                                   v-model="entry.name"
-                                   @input="autocomplete(index)"
-                                   :list="'food-list-' + index">
-                            <datalist :id="'food-list-' + index">
-                                <option v-for="food in filteredFoods(entry.name)" :value="food.name" :key="food.name"></option>
-                            </datalist>
-                        </td>
-                        <td><input type="number" v-model.number="entry.amount" @input="calculateNutrients(index)"></td>
-                        <td>{{ formatNumber(entry.carbs) }}</td>
-                        <td>{{ formatNumber(entry.fat) }}</td>
-                        <td>{{ formatNumber(entry.protein) }}</td>
-                        <td>{{ entry.calories.toFixed(2) }}</td>
-                        <td><button @click="removeEntry(index)">Remove</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button @click="addEntry">Add Food Item</button>
-
-
-            <p>This component demonstrates fetching data from the server.</p>
-
-            <div v-if="loading" class="loading">
-                Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationvue">https://aka.ms/jspsintegrationvue</a> for more details.
+            <div v-if="post" class="content">
+                <DailyFoodEntryTable :post="post" :entries="entries" />
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Measurement</th>
-                        <th>Carbohydrates (g)</th>
-                        <th>Fat (g)</th>
-                        <th>Proteins (g)</th>
-                        <th>Calories (kcal/100g)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="food in post" :key="food.name">
-                        <td>{{ food.name }}</td>
-                        <td>{{ food.measure }}</td>
-                        <td>{{ food.carbs }}</td>
-                        <td>{{ food.fat }}</td>
-                        <td>{{ food.protein }}</td>
-                        <td>{{ food.calories }}</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- Display nutrition table so far -->
+            <nutrition-table :posts="post":loading="loading" />
         </div>
     </div>
 </template>
@@ -88,11 +32,15 @@
 <script>
     import ProgressBar from './ProgressBar.vue';
     import CircularProgress from './CircularProgress.vue';
+    import NutritionTable from './NutritionTable.vue';
+    import DailyFoodEntryTable from './DailyFoodEntryTable.vue';
 
     export default {
         components: {
             ProgressBar,
-            CircularProgress
+            CircularProgress,
+            NutritionTable,
+            DailyFoodEntryTable
         },
         data() {
             return {
@@ -143,49 +91,8 @@
                         this.loading = false;
                     });
             },
-            addEntry() {
-                this.entries.push({ name: '', amount: 0, calories: 0 });
-            },
-            removeEntry(index) {
-                this.entries.splice(index, 1);
-            },
-            calculateCalories(index) {
-                const entry = this.entries[index];
-                const foodItem = this.post.find(food => food.name === entry.name);
-                if (foodItem) {
-                    entry.calories = (foodItem.calories / 100) * entry.amount;
-                }
-            },
-            calculateNutrients(index) {
-                const entry = this.entries[index];
-
-                // Assuming the 'post' data structure contains 'calories', 'protein', 'carbs', and 'fat' for each food item
-                const foodItem = this.post.find(food => food.name === entry.name);
-                if (foodItem) {
-                    // Define the nutrients you want to calculate
-                    const nutrients = ['calories', 'protein', 'carbs', 'fat'];
-
-                    nutrients.forEach(nutrient => {
-                        // For each nutrient, calculate the value based on the foodItem's value and the entry's amount
-                        // Ensure your entry model has these properties initialized to avoid undefined errors
-                        entry[nutrient] = (foodItem[nutrient] / 100) * entry.amount;
-                    });
-                }
-            },
             calculateTotal(nutrient) {
                 return this.entries.reduce((total, entry) => total + entry[nutrient], 0);
-            },
-            autocomplete(index) {
-                // Autocomplete logic if needed; here it triggers calculateCalories directly
-                this.calculateCalories(index);
-            },
-            filteredFoods(searchTerm) {
-                if (!searchTerm) return [];
-                const lowerCaseTerm = searchTerm.toLowerCase();
-                return this.post.filter(food => food.name.toLowerCase().includes(lowerCaseTerm));
-            },
-            formatNumber(value) {
-                return Number(value).toFixed(2); // Adjust the number of decimal places as needed
             },
         },
         created() {

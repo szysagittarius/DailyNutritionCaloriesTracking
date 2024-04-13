@@ -203,3 +203,4 @@ src/Presentation/Nop.Web/wwwroot/sitemaps/*
 src/packages/*
 src/Tests/Nop.Tests/Connections.resx
 /DailyNutritionCaloriesTracker.Server/appsettings.Development.json
+/DailyNutritionCaloriesTracker.Server/appsettings.json

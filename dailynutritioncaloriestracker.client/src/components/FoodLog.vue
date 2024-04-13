@@ -2,7 +2,7 @@
     <ul class="timeline">
         <li v-for="(log, index) in logs" :key="log.date" class="timeline-entry">
             <div class="card">
-                <h3>{{ log.date }}</h3>
+                <h3>{{ log.dateTime.split('T')[0] }}</h3>
                 <p>Calories: {{ log.calories }}</p>
                 <p>Carbs: {{ log.carbs }}</p>
                 <p>Protein: {{ log.protein }}</p>
@@ -29,7 +29,7 @@
         methods: {
             fetchData() {
                 this.loading = true;
-                fetch('foodlog/getlist')
+                fetch('foodlog/GetFoodLogs')
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');

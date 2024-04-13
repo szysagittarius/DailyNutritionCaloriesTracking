@@ -1,8 +1,16 @@
 ﻿using NutritionTracker.Api.Models;
 public class FoodLogDto : DtoBase
 {
-    public new Guid Id { get; private set; }
-    public DateTime DateTime { get; private set; }
+    public new Guid Id { get; set; }
+    public DateTime DateTime { get; set; }
+
+    public double Calories { get; set; }
+    public double Carbs { get; set; }
+    public double Protein { get; set; }
+    public double Fat { get; set; }
+
+    IEnumerable<FoodItemDto> FoodItems { get; set; } // Assuming FoodItem is also refactored to a domain model
+
     public DateTime CreateTime { get; private set; }
     public DateTime UpdateTime { get; private set; }
     public Guid UserId { get; private set; }
@@ -26,6 +34,10 @@ public class FoodLogDto : DtoBase
         UpdateTime = DateTime.Now;
         UserId = userId;
         User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be null.");
+    }
+
+    public FoodLogDto()
+    {
     }
 
     public void UpdateLog(DateTime dateTime)

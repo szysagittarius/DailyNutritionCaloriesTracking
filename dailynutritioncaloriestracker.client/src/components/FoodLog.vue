@@ -15,18 +15,39 @@
 </template>
 
 <script>
-export default {
-  name: 'FoodLog',
-  data() {
-    return {
-      logs: [
-        { date: '2023-04-10', calories: 2000, carbs: '50g', protein: '100g', fat: '70g' },
-        { date: '2023-04-11', calories: 1800, carbs: '45g', protein: '120g', fat: '60g' },
-        // Add more logs here
-      ]
+    export default {
+        name: 'FoodLog',
+        data() {
+            return {
+                logs: [],  // Start with an empty array or preloaded data if necessary
+                loading: false
+            };
+        },
+        mounted() {
+            this.fetchData();  // Automatically fetch data when the component mounts
+        },
+        methods: {
+            fetchData() {
+                this.loading = true;
+                fetch('foodlog/getlist')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(json => {
+                        // Assuming json is already an array with the correct structure
+                        this.logs = json;
+                        this.loading = false;
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                        this.loading = false;
+                    });
+            },
+        }
     };
-  }
-};
 </script>
 
 <style>

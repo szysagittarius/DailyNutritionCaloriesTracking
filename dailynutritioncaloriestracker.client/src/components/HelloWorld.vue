@@ -155,7 +155,7 @@
             fetchData() {
                 this.loading = true;
                 // Ensure the fetch URL is correct
-                fetch('foodnutrition')
+                fetch('foodnutrition/getlist')
                     .then(r => r.json())
                     .then(json => {
                         this.post = json;

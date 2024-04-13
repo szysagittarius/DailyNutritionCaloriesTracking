@@ -31,6 +31,15 @@ public class FoodLogController : ControllerBase
         //load FoodLogDto from database by calling the service
         var entities =  _foodLogService.GetAllAsync();
 
+
+    //logs:
+    //    [
+    //    { date: '2023-04-10', calories: 2000, carbs: '50g', protein: '100g', fat: '70g' },
+    //    { date: '2023-04-11', calories: 1800, carbs: '45g', protein: '120g', fat: '60g' },
+    //    // Add more logs here
+    //  ]
+
+
         return _mapper.Map<IEnumerable<FoodLogDto>>(entities);
         //return LoadData();
     }

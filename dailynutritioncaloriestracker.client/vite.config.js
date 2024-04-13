@@ -46,6 +46,11 @@ export default defineConfig({
             '^/foodnutrition': {
                 target,
                 secure: false
+            },
+            '^/foodlog': {  // New proxy for FoodLogController
+                target,
+/*                changeOrigin: true,*/
+                secure: false,
             }
         },
         port: 5173,

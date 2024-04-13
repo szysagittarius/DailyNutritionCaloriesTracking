@@ -25,7 +25,7 @@ public class FoodNutritionController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet(Name = "GetFoodNutrition")]
+    [HttpGet("getlist")]
     public async Task<IEnumerable<FoodNutritionDto>> GetAsync()
     {
         return await LoadDataAsync();

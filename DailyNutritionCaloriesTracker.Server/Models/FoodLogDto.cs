@@ -1,7 +1,6 @@
 ﻿using NutritionTracker.Api.Models;
 public class FoodLogDto : DtoBase
 {
-    public new Guid Id { get; set; }
     public DateTime DateTime { get; set; }
 
     public double TotalCalories { get; set; }
@@ -27,7 +26,6 @@ public class FoodLogDto : DtoBase
             throw new ArgumentException("UserId cannot be empty.", nameof(userId));
         }
 
-        Id = id;
         DateTime = dateTime;
         CreateTime = DateTime.Now;
         UpdateTime = DateTime.Now;

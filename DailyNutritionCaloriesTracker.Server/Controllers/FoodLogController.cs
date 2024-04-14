@@ -47,7 +47,7 @@ public class FoodLogController : ControllerBase
         //return LoadData();
     }
 
-    [HttpPost("CreateFoodLog")]
+    [HttpPost("createfoodlog")]
     public void Post(FoodLogDto foodLogDto)
     {
         //insert the FoodLogDto to the database by calling the service

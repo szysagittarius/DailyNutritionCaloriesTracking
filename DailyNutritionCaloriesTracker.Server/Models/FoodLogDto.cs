@@ -4,17 +4,16 @@ public class FoodLogDto : DtoBase
     public new Guid Id { get; set; }
     public DateTime DateTime { get; set; }
 
-    public double Calories { get; set; }
-    public double Carbs { get; set; }
-    public double Protein { get; set; }
-    public double Fat { get; set; }
+    public double TotalCalories { get; set; }
+    public double TotalCarbs { get; set; }
+    public double TotalProtein { get; set; }
+    public double TotalFat { get; set; }
 
     IEnumerable<FoodItemDto> FoodItems { get; set; } // Assuming FoodItem is also refactored to a domain model
 
     public DateTime CreateTime { get; private set; }
     public DateTime UpdateTime { get; private set; }
     public Guid UserId { get; private set; }
-    public UserDto User { get; private set; } // Assuming User is also refactored to a domain model
 
     public FoodLogDto(Guid id, DateTime dateTime, Guid userId, UserDto user)
     {
@@ -33,7 +32,6 @@ public class FoodLogDto : DtoBase
         CreateTime = DateTime.Now;
         UpdateTime = DateTime.Now;
         UserId = userId;
-        User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be null.");
     }
 
     public FoodLogDto()

@@ -2,7 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NT.Application.Contracts.Entities;
-using NT.Application.Contracts.Ports;
 using NT.Application.Services.Abstractions;
 
 namespace DailyNutritionCaloriesTracker.Server.Controllers;
@@ -29,7 +28,7 @@ public class FoodLogController : ControllerBase
     public IEnumerable<FoodLogDto> Get()
     {
         //load FoodLogDto from database by calling the service
-        var entities =  _foodLogService.GetAllAsync();
+        Task<IEnumerable<FoodLogEntity>> entities = _foodLogService.GetAllAsync();
 
         //return _mapper.Map<IEnumerable<FoodLogDto>>(entities);
         //logs:
@@ -39,20 +38,20 @@ public class FoodLogController : ControllerBase
         //    // Add more logs here
         //  ]
 
-        var foodlogs = new List<FoodLogDto>
+        List<FoodLogDto> foodlogs = new List<FoodLogDto>
         {
-            new FoodLogDto { DateTime = new DateTime(2023, 04, 10), Calories = 2000, Carbs = 50, Protein = 100, Fat = 70 },
-            new FoodLogDto { DateTime = new DateTime(2023, 04, 11), Calories = 1800, Carbs = 45, Protein = 120, Fat = 60 }
+            new FoodLogDto { DateTime = new DateTime(2023, 04, 10), TotalCalories = 2000, TotalCarbs = 50, TotalProtein = 100, TotalFat = 70 },
+            new FoodLogDto { DateTime = new DateTime(2023, 04, 11), TotalCalories = 1800, TotalCarbs = 45, TotalProtein = 120, TotalFat = 60 }
         };
         return foodlogs;
         //return LoadData();
     }
 
-    [HttpPost(Name = "CreateFoodLog")]
+    [HttpPost("CreateFoodLog")]
     public void Post(FoodLogDto foodLogDto)
     {
-       //insert the FoodLogDto to the database by calling the service
-       var entity = _mapper.Map<FoodLogEntity>(foodLogDto);
+        //insert the FoodLogDto to the database by calling the service
+        FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
         _foodLogService.AddAsync(entity);
 
     }
@@ -77,7 +76,7 @@ public class FoodLogController : ControllerBase
 
         //Imapper map the list of FoodNutritionDto to list of FoodNutritionEntity
         List<FoodNutritionEntity> foodNutritionEntities = new List<FoodNutritionEntity>();
-        
+
         foreach (FoodNutritionDto foodNutrition in foodNutritionList)
         {
             //FoodNutritionEntity foodNutritionEntity = _mapper.Map<FoodNutritionEntity>(foodNutrition);

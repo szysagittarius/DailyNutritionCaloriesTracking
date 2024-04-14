@@ -3,10 +3,10 @@
         <li v-for="(log, index) in logs" :key="log.date" class="timeline-entry">
             <div class="card">
                 <h3>{{ log.dateTime.split('T')[0] }}</h3>
-                <p>Calories: {{ log.calories }}</p>
-                <p>Carbs: {{ log.carbs }}</p>
-                <p>Protein: {{ log.protein }}</p>
-                <p>Fat: {{ log.fat }}</p>
+                <p>Calories: {{ log.totalCalories }}</p>
+                <p>Carbs: {{ log.totalCarbs }}</p>
+                <p>Protein: {{ log.totalProtein }}</p>
+                <p>Fat: {{ log.totalFat }}</p>
             </div>
             <!-- Arrow element, not added for the last item -->
             <div v-if="index !== logs.length - 1" class="arrow-down"></div>

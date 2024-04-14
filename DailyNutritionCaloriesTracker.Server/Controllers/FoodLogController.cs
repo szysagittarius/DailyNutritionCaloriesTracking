@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using NT.Application.Contracts.Entities;
 using NT.Application.Services.Abstractions;
 
@@ -48,51 +47,52 @@ public class FoodLogController : ControllerBase
     }
 
     [HttpPost("createfoodlog")]
-    public void Post(FoodLogDto foodLogDto)
+    public IActionResult Post([FromBody] FoodLogDto foodLogDto)
     {
         //insert the FoodLogDto to the database by calling the service
-        FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
-        _foodLogService.AddAsync(entity);
+        //FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
+
+        //FoodLogDto foodLogDto = request.FoodLogDto;
+        _logger.LogInformation("Received data: {@FoodLog}", foodLogDto);
+
+        if (!ModelState.IsValid)
+        {
+            _logger.LogWarning("Invalid data: {@ModelStateErrors}", ModelState);
+            return BadRequest(ModelState);
+        }
+
+        FoodLogEntity res = MapToEntity(foodLogDto);
+
+        // Process the data
+        return Ok();
+
+
+
+        //_foodLogService.AddAsync(entity);
 
     }
 
-
-    //if this changes to public, it will mess up the swagger documentation
-    private IEnumerable<FoodNutritionDto> LoadData()
+    public class FoodLogDtoRequest
     {
-        //load data from json file, under App_data folder in the project
-        string json = System.IO.File.ReadAllText("App_Data/food_nutritional_values.json");
+        public required FoodLogDto FoodLogDto { get; set; }
+    }
 
-        Dictionary<string, FoodNutritionDto>? foodNutritionDictionary = JsonConvert.DeserializeObject<Dictionary<string, FoodNutritionDto>>(json);
+    private FoodLogEntity MapToEntity(FoodLogDto dto)
+    {
+        IEnumerable<FoodItemEntity> foodItems = dto.FoodItems.Select(_mapper.Map<FoodItemEntity>);
 
-        List<FoodNutritionDto> foodNutritionList = foodNutritionDictionary.Select(kvp =>
-        {
-            FoodNutritionDto foodNutrition = kvp.Value;
-            //foodNutrition.Id = Guid.NewGuid();
-            foodNutrition.Name = kvp.Key;
-            foodNutrition.Measurement = "per 100g";
-            return foodNutrition;
-        }).ToList();
+        FoodLogEntity logEntity = new FoodLogEntity();
+        logEntity.DateTime = dto.DateTime;
 
-        //Imapper map the list of FoodNutritionDto to list of FoodNutritionEntity
-        List<FoodNutritionEntity> foodNutritionEntities = new List<FoodNutritionEntity>();
+        logEntity.UserId = dto.UserId;
 
-        foreach (FoodNutritionDto foodNutrition in foodNutritionList)
-        {
-            //FoodNutritionEntity foodNutritionEntity = _mapper.Map<FoodNutritionEntity>(foodNutrition);
-
-            //var foodNutritionEntity = MapDtoToEntity(foodNutrition);
-            //foodNutritionEntities.Add(foodNutritionEntity);
-        }
+        logEntity.FoodItems = foodItems;
 
 
-        //add the list of FoodNutritionEntity to the database
-        //foreach (FoodLogEntity foodNutrition in foodNutritionEntities)
-        //{
-        //    _foodLogService.AddAsync(foodNutrition);
-        //}
 
-        return foodNutritionList;
+
+        return logEntity;
+        //throw new NotImplementedException();
     }
 
 

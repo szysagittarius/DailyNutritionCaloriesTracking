@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using NT.Application.Contracts.Entities;
 using NT.Application.DI;
 using NT.Database.DI;
 using NT.Ef.Repositories.DI;
@@ -15,9 +14,9 @@ public static class DependencyRegistration
         MapperConfiguration dtoMapperConfig = new MapperConfiguration(cfg =>
         {
             cfg.AddProfile(new FoodNutritionDtoProfiler());
-            //cfg.AddProfile(new FoodItemDtoProfiler());
-            //cfg.AddProfile(new FoodLogDtoProfiler());
-            //cfg.AddProfile(new UserDtoProfiler());
+            cfg.AddProfile(new FoodItemDtoProfiler());
+            cfg.AddProfile(new FoodLogDtoProfiler());
+            cfg.AddProfile(new UserDtoProfiler());
         });
 
         IMapper dtoMapper = dtoMapperConfig.CreateMapper();

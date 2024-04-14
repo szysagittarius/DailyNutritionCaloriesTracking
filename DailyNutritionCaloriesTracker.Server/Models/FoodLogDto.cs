@@ -8,7 +8,7 @@ public class FoodLogDto : DtoBase
     public double TotalProtein { get; set; }
     public double TotalFat { get; set; }
 
-    IEnumerable<FoodItemDto> FoodItems { get; set; } // Assuming FoodItem is also refactored to a domain model
+    public IEnumerable<FoodItemDto> FoodItems { get; set; } // Assuming FoodItem is also refactored to a domain model
 
     public DateTime CreateTime { get; private set; }
     public DateTime UpdateTime { get; private set; }
@@ -30,10 +30,13 @@ public class FoodLogDto : DtoBase
         CreateTime = DateTime.Now;
         UpdateTime = DateTime.Now;
         UserId = userId;
+
+        FoodItems = new List<FoodItemDto>();
     }
 
     public FoodLogDto()
     {
+        FoodItems = new List<FoodItemDto>();
     }
 
     public void UpdateLog(DateTime dateTime)

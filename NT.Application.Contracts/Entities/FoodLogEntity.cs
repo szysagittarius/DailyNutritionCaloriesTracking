@@ -1,31 +1,38 @@
 ﻿namespace NT.Application.Contracts.Entities;
 public class FoodLogEntity : EntityBase
 {
-    public new Guid Id { get; private set; }
-    public DateTime DateTime { get; private set; }
-    public DateTime CreateTime { get; private set; }
-    public DateTime UpdateTime { get; private set; }
-    public Guid UserId { get; private set; }
-    public UserEntity User { get; private set; } // Assuming User is also refactored to a domain model
+    public new Guid Id { get; set; }
+    public DateTime DateTime { get; set; }
+    public DateTime CreateTime { get; set; }
+    public DateTime UpdateTime { get; set; }
 
-    public FoodLogEntity(Guid id, DateTime dateTime, Guid userId, UserEntity user)
+    public IEnumerable<FoodItemEntity> FoodItems { get; set; } // Assuming FoodItem is also refactored to a domain model
+
+
+    public Guid UserId { get; set; }
+
+    public FoodLogEntity(DateTime dateTime, Guid userId, IEnumerable<FoodItemEntity> foodItems)
     {
-        if (id == Guid.Empty)
-        {
-            throw new ArgumentException("Id cannot be empty.", nameof(id));
-        }
 
         if (userId == Guid.Empty)
         {
             throw new ArgumentException("UserId cannot be empty.", nameof(userId));
         }
 
-        Id = id;
+        Id = Guid.NewGuid();
         DateTime = dateTime;
         CreateTime = DateTime.Now;
         UpdateTime = DateTime.Now;
         UserId = userId;
-        User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be null.");
+
+        FoodItems = foodItems;
+    }
+
+    public FoodLogEntity()
+    {
+        CreateTime = DateTime.Now;
+        UpdateTime = DateTime.Now;
+        FoodItems = new List<FoodItemEntity>();
     }
 
     public void UpdateLog(DateTime dateTime)

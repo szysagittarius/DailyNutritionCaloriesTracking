@@ -23,14 +23,12 @@ public static class DependencyRegistration
         services.AddSingleton(dtoMapper);
 
 
-
         services.RegisterApplicationServices();
 
         services.RegisterEfDatabase(option =>
         {
             option.ConnectionString = configurationManager.GetConnectionString("NutritionTracker");
         });
-
         services.RegisterRepository();
 
         return services;

@@ -11,6 +11,10 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.IgnoreNullValues = true;
     });
 
+// Add AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 builder.Services.RegisterDependencyInjection(builder.Configuration);
 
 

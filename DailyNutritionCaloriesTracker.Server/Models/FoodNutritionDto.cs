@@ -1,11 +1,10 @@
 using Newtonsoft.Json;
-using NutritionTracker.Api.Models;
 
 public class FoodNutritionDto
 {
     //public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Measurement { get; set; }
+    public required string Name { get; set; }
+    public required string Measurement { get; set; }
 
     [JsonProperty("Calories (kcal/100g)")]
     public double Calories { get; set; }

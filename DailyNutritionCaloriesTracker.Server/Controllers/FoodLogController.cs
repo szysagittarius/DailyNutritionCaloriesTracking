@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NT.Application.Contracts.Entities;
 using NT.Application.Services.Abstractions;
+using NutritionTracker.Api.Profilers;
 
 namespace DailyNutritionCaloriesTracker.Server.Controllers;
 
@@ -37,10 +38,14 @@ public class FoodLogController : ControllerBase
         //    // Add more logs here
         //  ]
 
+        FoodItemDto foodItem1 = new FoodItemDto { FoodNutritionId = Guid.NewGuid(), Unit = 1, FoodLogId = Guid.NewGuid() };
+        LinkedList<FoodItemDto> foodItems = new LinkedList<FoodItemDto>();
+        foodItems.AddLast(foodItem1);
+
         List<FoodLogDto> foodlogs = new List<FoodLogDto>
         {
-            new FoodLogDto { DateTime = new DateTime(2023, 04, 10), TotalCalories = 2000, TotalCarbs = 50, TotalProtein = 100, TotalFat = 70 },
-            new FoodLogDto { DateTime = new DateTime(2023, 04, 11), TotalCalories = 1800, TotalCarbs = 45, TotalProtein = 120, TotalFat = 60 }
+            new FoodLogDto { DateTime = new DateTime(2023, 04, 10), TotalCalories = 2000, TotalCarbs = 50, TotalProtein = 100, TotalFat = 70, FoodItems = foodItems },
+            new FoodLogDto { DateTime = new DateTime(2023, 04, 11), TotalCalories = 1800, TotalCarbs = 45, TotalProtein = 120, TotalFat = 60, FoodItems = foodItems}
         };
         return foodlogs;
         //return LoadData();
@@ -50,50 +55,36 @@ public class FoodLogController : ControllerBase
     public IActionResult Post([FromBody] FoodLogDto foodLogDto)
     {
         //insert the FoodLogDto to the database by calling the service
-        //FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
+
+        //1
+        MapperConfiguration dtoMapperConfig = new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile(new FoodNutritionDtoProfiler());
+            cfg.AddProfile(new FoodItemDtoProfiler());
+            cfg.AddProfile(new FoodLogDtoProfiler());
+            cfg.AddProfile(new UserDtoProfiler());
+        });
+
+        IMapper dtoMapper = dtoMapperConfig.CreateMapper();
+
+        FoodLogEntity entity3 = dtoMapper.Map<FoodLogEntity>(foodLogDto);
+
+        //2 need to fix bug here, on
+        FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
+
+
+
 
         //FoodLogDto foodLogDto = request.FoodLogDto;
         _logger.LogInformation("Received data: {@FoodLog}", foodLogDto);
 
-        if (!ModelState.IsValid)
-        {
-            _logger.LogWarning("Invalid data: {@ModelStateErrors}", ModelState);
-            return BadRequest(ModelState);
-        }
 
-        FoodLogEntity res = MapToEntity(foodLogDto);
+        //FoodLogEntity res = MapToEntity(foodLogDto);
 
         // Process the data
         return Ok();
 
-
-
         //_foodLogService.AddAsync(entity);
 
     }
-
-    public class FoodLogDtoRequest
-    {
-        public required FoodLogDto FoodLogDto { get; set; }
-    }
-
-    private FoodLogEntity MapToEntity(FoodLogDto dto)
-    {
-        IEnumerable<FoodItemEntity> foodItems = dto.FoodItems.Select(_mapper.Map<FoodItemEntity>);
-
-        FoodLogEntity logEntity = new FoodLogEntity();
-        logEntity.DateTime = dto.DateTime;
-
-        logEntity.UserId = dto.UserId;
-
-        logEntity.FoodItems = foodItems;
-
-
-
-
-        return logEntity;
-        //throw new NotImplementedException();
-    }
-
-
 }

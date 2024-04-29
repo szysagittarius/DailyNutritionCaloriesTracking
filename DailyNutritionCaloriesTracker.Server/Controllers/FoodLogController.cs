@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NT.Application.Contracts.Entities;
 using NT.Application.Services.Abstractions;
+using NutritionTracker.Api.Models;
 using NutritionTracker.Api.Profilers;
 
 namespace DailyNutritionCaloriesTracker.Server.Controllers;
@@ -52,7 +53,7 @@ public class FoodLogController : ControllerBase
     }
 
     [HttpPost("createfoodlog")]
-    public IActionResult Post([FromBody] FoodLogDto foodLogDto)
+    public async Task<IActionResult> PostAsync([FromBody] FoodLogDto foodLogDto)
     {
         //insert the FoodLogDto to the database by calling the service
 
@@ -70,21 +71,22 @@ public class FoodLogController : ControllerBase
         FoodLogEntity entity3 = dtoMapper.Map<FoodLogEntity>(foodLogDto);
 
         //2 need to fix bug here, on
-        FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
+        //FoodLogEntity entity = _mapper.Map<FoodLogEntity>(foodLogDto);
 
 
+        //temp bypass, need to covert to real after user controller added
+        entity3.UserId = Guid.Parse("2c82025f-f351-4246-aaff-21301ec71803");
 
-
-        //FoodLogDto foodLogDto = request.FoodLogDto;
-        _logger.LogInformation("Received data: {@FoodLog}", foodLogDto);
-
-
-        //FoodLogEntity res = MapToEntity(foodLogDto);
+        //UI work need to include the guid, it will be removed
+        foreach (FoodItemEntity item in entity3.FoodItems)
+        {
+            item.FoodNutritionId = Guid.Parse("B83D0C39-DBEA-44C8-EC45-08DC5AC3A936");
+        }
 
         // Process the data
+        await _foodLogService.AddAsync(entity3);
+
+
         return Ok();
-
-        //_foodLogService.AddAsync(entity);
-
     }
 }

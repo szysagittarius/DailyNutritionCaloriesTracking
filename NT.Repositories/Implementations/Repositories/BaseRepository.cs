@@ -14,9 +14,18 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
-        await dbContext.Set<TEntity>().AddAsync(entity);
-        await dbContext.SaveChangesAsync();
-        return entity;
+        try
+        {
+            await dbContext.Set<TEntity>().AddAsync(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+
     }
 
     public async Task DeleteAsync(Guid id)

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NT.Database.Entities;
 
@@ -15,7 +10,7 @@ public record FoodLog
     [Column("Id", TypeName = "uniqueidentifier")]
     public required Guid Id { get; init; }
 
-    
+
     [Column("DateTime", TypeName = "datetime")]
     public required DateTime DateTime { get; init; }
 
@@ -30,4 +25,8 @@ public record FoodLog
     public required Guid UserId { get; init; }
 
     public required User User { get; init; }
+
+
+    public IEnumerable<FoodItem> FoodItems { get; init; } = Enumerable.Empty<FoodItem>();
+
 }

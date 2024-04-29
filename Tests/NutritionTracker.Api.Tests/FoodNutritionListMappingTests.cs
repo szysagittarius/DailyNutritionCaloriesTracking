@@ -1,6 +1,7 @@
 using AutoMapper;
 using Newtonsoft.Json;
 using NT.Application.Contracts.Entities;
+using NutritionTracker.Api.Models;
 using NutritionTracker.Api.Profilers;
 
 namespace NutritionTracker.Api.Tests;
@@ -11,7 +12,7 @@ public class FoodNutritionListMappingTests
     [SetUp]
     public void Setup()
     {
-        var configuration = new MapperConfiguration(cfg =>
+        MapperConfiguration configuration = new MapperConfiguration(cfg =>
         {
             cfg.AddProfile<FoodNutritionDtoProfiler>(); // Assuming your profile class is named FoodNutritionDtoProfiler
         });
@@ -23,7 +24,7 @@ public class FoodNutritionListMappingTests
     public void EntityToDtoMapping_IsCorrect()
     {
         // Arrange
-        var entity = new FoodNutritionEntity
+        FoodNutritionEntity entity = new FoodNutritionEntity
         {
             //Id = Guid.NewGuid(),
             Name = "Apple",
@@ -35,22 +36,22 @@ public class FoodNutritionListMappingTests
         };
 
         // Act
-        var dto = _mapper.Map<FoodNutritionDto>(entity);
+        FoodNutritionDto dto = _mapper.Map<FoodNutritionDto>(entity);
 
         // Assert
-        Assert.AreEqual(entity.Name, dto.Name);
-        Assert.AreEqual(entity.Measurement, dto.Measurement);
-        Assert.AreEqual(entity.Calories, dto.Calories);
-        Assert.AreEqual(entity.Protein, dto.Protein);
-        Assert.AreEqual(entity.Carbs, dto.Carbs);
-        Assert.AreEqual(entity.Fat, dto.Fat);
+        Assert.That(dto.Name, Is.EqualTo(entity.Name));
+        Assert.That(dto.Measurement, Is.EqualTo(entity.Measurement));
+        Assert.That(dto.Calories, Is.EqualTo(entity.Calories));
+        Assert.That(dto.Protein, Is.EqualTo(entity.Protein));
+        Assert.That(dto.Carbs, Is.EqualTo(entity.Carbs));
+        Assert.That(dto.Fat, Is.EqualTo(entity.Fat));
     }
 
     [Test]
     public void DtoToEntityMapping_IsCorrect()
     {
         // Arrange
-        var dto = new FoodNutritionDto
+        FoodNutritionDto dto = new FoodNutritionDto
         {
             Name = "Banana",
             Measurement = "100g",
@@ -61,22 +62,22 @@ public class FoodNutritionListMappingTests
         };
 
         // Act
-        var entity = _mapper.Map<FoodNutritionEntity>(dto);
+        FoodNutritionEntity entity = _mapper.Map<FoodNutritionEntity>(dto);
 
         // Assert
-        Assert.AreEqual(dto.Name, entity.Name);
-        Assert.AreEqual(dto.Measurement, entity.Measurement);
-        Assert.AreEqual(dto.Calories, entity.Calories);
-        Assert.AreEqual(dto.Protein, entity.Protein);
-        Assert.AreEqual(dto.Carbs, entity.Carbs);
-        Assert.AreEqual(dto.Fat, entity.Fat);
+        Assert.That(entity.Name, Is.EqualTo(dto.Name));
+        Assert.That(entity.Measurement, Is.EqualTo(dto.Measurement));
+        Assert.That(entity.Calories, Is.EqualTo(dto.Calories));
+        Assert.That(entity.Protein, Is.EqualTo(dto.Protein));
+        Assert.That(entity.Carbs, Is.EqualTo(dto.Carbs));
+        Assert.That(entity.Fat, Is.EqualTo(dto.Fat));
     }
 
     [Test]
     public void ListOfDtoToEntityMapping_IsCorrect()
     {
         // Arrange
-        var foodNutritionList = new List<FoodNutritionDto>
+        List<FoodNutritionDto> foodNutritionList = new List<FoodNutritionDto>
             {
                 new FoodNutritionDto
                 {
@@ -102,21 +103,21 @@ public class FoodNutritionListMappingTests
         List<FoodNutritionEntity> foodNutritionEntities = _mapper.Map<List<FoodNutritionEntity>>(foodNutritionList);
 
         // Assert
-        Assert.AreEqual(foodNutritionList.Count, foodNutritionEntities.Count, "The mapped list has a different number of items.");
+        Assert.That(foodNutritionEntities.Count, Is.EqualTo(foodNutritionList.Count), "The mapped list has a different number of items.");
 
         for (int i = 0; i < foodNutritionList.Count; i++)
         {
-            Assert.AreEqual(foodNutritionList[i].Name, foodNutritionEntities[i].Name, $"Item {i} Name does not match.");
-            Assert.AreEqual(foodNutritionList[i].Measurement, foodNutritionEntities[i].Measurement, $"Item {i} Measurement does not match.");
-            Assert.AreEqual(foodNutritionList[i].Calories, foodNutritionEntities[i].Calories, $"Item {i} Calories does not match.");
-            Assert.AreEqual(foodNutritionList[i].Protein, foodNutritionEntities[i].Protein, $"Item {i} Protein does not match.");
-            Assert.AreEqual(foodNutritionList[i].Carbs, foodNutritionEntities[i].Carbs, $"Item {i} Carbs does not match.");
-            Assert.AreEqual(foodNutritionList[i].Fat, foodNutritionEntities[i].Fat, $"Item {i} Fat does not match.");
+            Assert.That(foodNutritionEntities[i].Name, Is.EqualTo(foodNutritionList[i].Name), $"Item {i} Name does not match.");
+            Assert.That(foodNutritionEntities[i].Measurement, Is.EqualTo(foodNutritionList[i].Measurement), $"Item {i} Measurement does not match.");
+            Assert.That(foodNutritionEntities[i].Calories, Is.EqualTo(foodNutritionList[i].Calories), $"Item {i} Calories does not match.");
+            Assert.That(foodNutritionEntities[i].Protein, Is.EqualTo(foodNutritionList[i].Protein), $"Item {i} Protein does not match.");
+            Assert.That(foodNutritionEntities[i].Carbs, Is.EqualTo(foodNutritionList[i].Carbs), $"Item {i} Carbs does not match.");
+            Assert.That(foodNutritionEntities[i].Fat, Is.EqualTo(foodNutritionList[i].Fat), $"Item {i} Fat does not match.");
         }
     }
 
     [Test]
-    public void ListOfDtoToEntityMappingFromFile_IsCorrect() 
+    public void ListOfDtoToEntityMappingFromFile_IsCorrect()
     {
         string json = System.IO.File.ReadAllText("App_Data/food_nutritional_values.json");
 
@@ -141,7 +142,7 @@ public class FoodNutritionListMappingTests
             foodNutritionEntities.Add(foodNutritionEntity);
         }
 
-        Assert.AreEqual(15, foodNutritionEntities.Count, $"Item counts is not 15.");
+        Assert.That(foodNutritionEntities.Count, Is.EqualTo(15), $"Item counts is not 15.");
 
     }
 

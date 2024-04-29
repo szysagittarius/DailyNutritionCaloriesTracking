@@ -1,8 +1,9 @@
 using Newtonsoft.Json;
+namespace NutritionTracker.Api.Models;
 
 public class FoodNutritionDto
 {
-    //public Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required string Name { get; set; }
     public required string Measurement { get; set; }
 

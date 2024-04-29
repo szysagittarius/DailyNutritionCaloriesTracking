@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using NT.Application.Contracts.Entities;
+using NutritionTracker.Api.Models;
 
 namespace NutritionTracker.Api.Profilers;
 
@@ -6,7 +8,7 @@ public class FoodLogDtoProfiler : Profile
 {
     public FoodLogDtoProfiler()
     {
-        CreateMap<FoodLogDto, NT.Application.Contracts.Entities.FoodLogEntity>()
+        CreateMap<FoodLogDto, FoodLogEntity>()
                        .ForMember(dest => dest.FoodItems, opt => opt.MapFrom(src => src.FoodItems))
                        .ReverseMap();
 

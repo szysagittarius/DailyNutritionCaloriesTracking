@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NT.Application.Contracts.Entities;
 using NT.Application.Services.Abstractions;
+using NutritionTracker.Api.Models;
+using NutritionTracker.Api.Profilers;
 
 namespace DailyNutritionCaloriesTracker.Server.Controllers;
 
@@ -25,9 +27,23 @@ public class FoodNutritionController : ControllerBase
     }
 
     [HttpGet("getlist")]
-    public IEnumerable<FoodNutritionDto> Get()
+    public async Task<IEnumerable<FoodNutritionDto>> Get()
     {
-        return LoadData();
+        MapperConfiguration dtoMapperConfig = new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile(new FoodNutritionDtoProfiler());
+            cfg.AddProfile(new FoodItemDtoProfiler());
+            cfg.AddProfile(new FoodLogDtoProfiler());
+            cfg.AddProfile(new UserDtoProfiler());
+        });
+
+        IMapper dtoMapper = dtoMapperConfig.CreateMapper();
+
+        IEnumerable<FoodNutritionEntity> entities = await _foodNutritionService.GetFoodNutritionAsync();
+
+        IEnumerable<FoodNutritionDto> entitieDtos = entities.Select(e => dtoMapper.Map<FoodNutritionDto>(e)); ;
+
+        return entitieDtos;
     }
 
     //if this changes to public, it will mess up the swagger documentation

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using NT.Application.Contracts.Entities;
+using NutritionTracker.Api.Models;
 
 namespace NutritionTracker.Api.Profilers;
 

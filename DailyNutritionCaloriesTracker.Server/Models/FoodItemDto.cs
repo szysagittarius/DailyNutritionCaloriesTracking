@@ -1,4 +1,5 @@
-﻿using NutritionTracker.Api.Models;
+﻿namespace NutritionTracker.Api.Models;
+
 public class FoodItemDto : DtoBase
 {
     public Guid FoodNutritionId { get; set; }

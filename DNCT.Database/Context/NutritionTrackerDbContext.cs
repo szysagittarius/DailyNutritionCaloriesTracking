@@ -17,20 +17,24 @@ public class NutritionTrackerDbContext(DbContextOptions<NutritionTrackerDbContex
 
         modelBuilder.HasDefaultSchema("Nutrition");
 
-        // Define table names and relationships explicitly if needed
-        //modelBuilder.Entity<User>().ToTable("Users");
-        //modelBuilder.Entity<FoodLog>().ToTable("FoodLogs")
+        //Define table names and relationships explicitly if needed
+        //modelBuilder.Entity<User>();
+
+        //modelBuilder.Entity<FoodLog>()
         //    .HasOne(fl => fl.User)
         //    .WithMany()
         //    .HasForeignKey(fl => fl.UserId);
-        //modelBuilder.Entity<FoodItem>().ToTable("FoodItems")
+
+        //modelBuilder.Entity<FoodItem>()
         //    .HasOne(fi => fi.FoodLog)
         //    .WithMany()
         //    .HasForeignKey(fi => fi.FoodLogId);
+
         //modelBuilder.Entity<FoodItem>()
         //    .HasOne(fi => fi.FoodNutrition)
         //    .WithMany()
         //    .HasForeignKey(fi => fi.FoodNutritionId);
+
         //modelBuilder.Entity<FoodNutrition>().ToTable("FoodNutritions");
 
         // Additional configuration can go here

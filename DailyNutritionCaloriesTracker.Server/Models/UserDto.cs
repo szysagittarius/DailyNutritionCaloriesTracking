@@ -1,5 +1,4 @@
-﻿
-using NutritionTracker.Api.Models;
+﻿namespace NutritionTracker.Api.Models;
 
 public class UserDto : DtoBase
 {

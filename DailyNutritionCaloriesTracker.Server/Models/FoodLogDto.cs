@@ -1,4 +1,6 @@
-﻿public class FoodLogDto
+﻿namespace NutritionTracker.Api.Models;
+
+public class FoodLogDto
 {
     public double TotalCalories { get; set; }
     public double TotalCarbs { get; set; }

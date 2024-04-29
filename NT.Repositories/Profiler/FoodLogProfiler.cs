@@ -7,6 +7,8 @@ internal class FoodLogProfiler : Profile
 {
     public FoodLogProfiler()
     {
-        CreateMap<FoodLogEntity, FoodLog>().ReverseMap();
+        CreateMap<FoodLogEntity, FoodLog>()
+            .ForMember(dest => dest.FoodItems, opt => opt.MapFrom(src => src.FoodItems))
+            .ReverseMap();
     }
 }

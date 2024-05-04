@@ -21,6 +21,7 @@ internal class FoodLogService : IFoodLogService
         try
         {
             FoodLogEntity result = await _foodLogDataHandler.AddAsync(foodLog);
+            await _unitOfWork.SaveChangesAsync();
             await _unitOfWork.CommitAsync();  // Commit the transaction
             return result;
         }

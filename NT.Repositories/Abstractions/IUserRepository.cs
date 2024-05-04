@@ -2,6 +2,6 @@
 
 namespace NT.Ef.Repositories.Abstractions;
 
-internal interface IUserRepository : IBaseRepository<User>
+public interface IUserRepository : IBaseRepository<User>
 {
 }

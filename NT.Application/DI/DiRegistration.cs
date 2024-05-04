@@ -10,6 +10,7 @@ public static class DiRegistration
         //services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IFoodLogService, FoodLogService>();
         services.AddScoped<IFoodNutritionService, FoodNutritionService>();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

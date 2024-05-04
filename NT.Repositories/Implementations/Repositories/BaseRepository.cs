@@ -17,12 +17,10 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
         try
         {
             await dbContext.Set<TEntity>().AddAsync(entity);
-            await dbContext.SaveChangesAsync();
             return entity;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-
             throw;
         }
 

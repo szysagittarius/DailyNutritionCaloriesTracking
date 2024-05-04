@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Application", "NT.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NT.Application.Contracts", "NT.Application.Contracts\NT.Application.Contracts.csproj", "{A56717A2-332F-4D43-9917-C77C0BDF847A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionTracker.Api.Tests", "Tests\NutritionTracker.Api.Tests\NutritionTracker.Api.Tests.csproj", "{B237D057-96B4-4EE4-8995-7104CD1F36F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutritionTracker.Api.Tests", "Tests\NutritionTracker.Api.Tests\NutritionTracker.Api.Tests.csproj", "{B237D057-96B4-4EE4-8995-7104CD1F36F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NutritionTracker.Application", "NutritionTracker.Application", "{6DD5DAD1-C106-4CBF-B57B-9C9A8766D733}"
 EndProject
@@ -24,6 +24,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NutritionTracker.Presentation", "NutritionTracker.Presentation", "{BE90A926-9340-474F-BC08-552D9DBB11AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NutritionTracker.Tests", "NutritionTracker.Tests", "{53E90AB8-AE4D-45CD-9781-073CC5EFF81B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{2E47B1F0-0B5C-4EB9-A1BC-864037BE2930}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{6DB313C0-9F75-4B44-AF34-33AF472F89A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Representation", "Representation", "{67D283B4-B8A0-4EC7-9E35-4EBA5B17B69A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +79,9 @@ Global
 		{73B962AC-1790-4773-B631-BDB81DABB324} = {6DD5DAD1-C106-4CBF-B57B-9C9A8766D733}
 		{A56717A2-332F-4D43-9917-C77C0BDF847A} = {6DD5DAD1-C106-4CBF-B57B-9C9A8766D733}
 		{B237D057-96B4-4EE4-8995-7104CD1F36F9} = {53E90AB8-AE4D-45CD-9781-073CC5EFF81B}
+		{2E47B1F0-0B5C-4EB9-A1BC-864037BE2930} = {53E90AB8-AE4D-45CD-9781-073CC5EFF81B}
+		{6DB313C0-9F75-4B44-AF34-33AF472F89A5} = {53E90AB8-AE4D-45CD-9781-073CC5EFF81B}
+		{67D283B4-B8A0-4EC7-9E35-4EBA5B17B69A} = {53E90AB8-AE4D-45CD-9781-073CC5EFF81B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5D899DC-A938-4A39-8AB7-A3588C6735FB}

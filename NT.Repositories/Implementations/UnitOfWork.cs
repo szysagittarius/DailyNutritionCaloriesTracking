@@ -3,13 +3,19 @@ using NT.Application.Contracts.Ports;
 using NT.Database.Context;
 
 namespace NT.Ef.Repositories.Implementations;
-public class UnitOfWork(NutritionTrackerDbContext context) : IUnitOfWork
+public class UnitOfWork : IUnitOfWork
 {
+    private readonly NutritionTrackerDbContext _context;
     private IDbContextTransaction? _transaction;
+
+    public UnitOfWork(NutritionTrackerDbContext context)
+    {
+        _context = context;
+    }
 
     public async Task BeginTransactionAsync()
     {
-        _transaction = await context.Database.BeginTransactionAsync();
+        _transaction = await _context.Database.BeginTransactionAsync();
     }
 
     public bool HasActiveTransaction()
@@ -19,21 +25,13 @@ public class UnitOfWork(NutritionTrackerDbContext context) : IUnitOfWork
 
     public async Task CommitAsync()
     {
-        try
+        if (_transaction == null)
         {
-            await _transaction?.CommitAsync();
+            throw new InvalidOperationException("Transaction has not been started");
         }
-        catch
-        {
-            // Log exception, handle error as needed
-            await RollbackAsync();
-            throw;
-        }
-        finally
-        {
-            //await _transaction?.DisposeAsync();
-            //_transaction = null;
-        }
+
+        await _transaction?.CommitAsync();
+
     }
 
     public async Task RollbackAsync()
@@ -44,17 +42,9 @@ public class UnitOfWork(NutritionTrackerDbContext context) : IUnitOfWork
 
     public async Task SaveChangesAsync()
     {
-        await context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 
-    private async Task DisposeTransactionAsync()
-    {
-        if (_transaction != null)
-        {
-            await _transaction.DisposeAsync();
-            _transaction = null;
-        }
-    }
 
     public void Dispose()
     {
@@ -64,6 +54,7 @@ public class UnitOfWork(NutritionTrackerDbContext context) : IUnitOfWork
         // Do not dispose the _context here if it's being managed by DI
         // Dispose only the transaction
         //DisposeTransactionAsync().Wait();
+        GC.SuppressFinalize(this);
     }
 
 

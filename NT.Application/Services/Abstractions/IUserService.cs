@@ -4,4 +4,6 @@ namespace NT.Application.Services.Abstractions;
 public interface IUserService
 {
     Task<UserEntity> AddAsync(UserEntity user);
+
+    Task<IEnumerable<UserEntity>> GetAllAsync();
 }

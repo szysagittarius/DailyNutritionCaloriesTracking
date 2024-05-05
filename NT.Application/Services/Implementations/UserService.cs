@@ -28,4 +28,9 @@ public class UserService : IUserService
             throw;
         }
     }
+
+    public async Task<IEnumerable<UserEntity>> GetAllAsync()
+    {
+        return await _userDataHandler.GetAllAsync();
+    }
 }

@@ -3,11 +3,11 @@
 namespace NT.Application.Contracts.Ports;
 public interface IUserDataHandler
 {
-    //Task<UserEntity> GetUserAsync(string username);
-    //Task<IEnumerable<UserEntity>> GetUsersAsync();
+    Task<UserEntity> GetAsync(string username);
+    Task<IEnumerable<UserEntity>> GetAllAsync();
     Task<UserEntity> AddAsync(UserEntity user);
-    //Task<UserEntity> UpdateUserAsync(UserEntity user);
-    //Task DeleteUserAsync(string username);
-    //Task DeleteUserAsync(IEnumerable<string> usernames);
-    //Task DeleteUserAsync();
+    Task<UserEntity> UpdateAsync(UserEntity user);
+    Task DeleteAsync(string username);
+    Task DeleteAsync(IEnumerable<string> usernames);
+    Task DeleteAsync();
 }

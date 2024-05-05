@@ -16,12 +16,47 @@ internal class UserDataHandler : IUserDataHandler
         _mapper = mapper;
     }
 
+    public async Task<IEnumerable<UserEntity>> GetAllAsync()
+    {
+        List<User> users = await Task.FromResult(_userRepository.GetAll().ToList());
+        return _mapper.Map<IEnumerable<UserEntity>>(users);
+    }
+
+    public Task<UserEntity> GetAsync(string username)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<UserEntity> UpdateAsync(UserEntity user)
+    {
+        User userModel = _mapper.Map<User>(user);
+        User updatedUser = await _userRepository.UpdateAsync(userModel);
+        return _mapper.Map<UserEntity>(updatedUser);
+    }
+
     public async Task<UserEntity> AddAsync(UserEntity userEntity)
     {
         User user = _mapper.Map<User>(userEntity);
         User addedUser = await _userRepository.AddAsync(user);
         return _mapper.Map<UserEntity>(addedUser);
     }
+
+    public Task DeleteAsync(string username)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync(IEnumerable<string> usernames)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+
 
 
 }

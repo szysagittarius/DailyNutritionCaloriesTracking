@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NT.Database.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NT.Database.DI;
 
@@ -15,7 +10,7 @@ public static class DiRegistration
     {
         ArgumentNullException.ThrowIfNull(configBuilder, nameof(configBuilder));
 
-        var dbConfig = new DatabaseConfig();
+        DatabaseConfig dbConfig = new DatabaseConfig();
         configBuilder(dbConfig);
 
         ArgumentException.ThrowIfNullOrEmpty(dbConfig.ConnectionString, nameof(dbConfig.ConnectionString));

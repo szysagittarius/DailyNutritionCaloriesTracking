@@ -47,6 +47,10 @@ export default defineConfig({
                 target,
                 secure: false
             },
+            '^/user': {
+                target,
+                secure: false
+            },
             '^/foodlog': {  // New proxy for FoodLogController
                 target,
 /*                changeOrigin: true,*/

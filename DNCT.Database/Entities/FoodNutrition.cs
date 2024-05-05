@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NT.Database.Entities;
 
@@ -23,7 +17,7 @@ public record class FoodNutrition
 
     [Column("Carbs")]
     public required double Carbs { get; set; }
-    
+
     [Column("Fat")]
     public required double Fat { get; set; }
 

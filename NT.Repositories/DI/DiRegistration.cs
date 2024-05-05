@@ -19,7 +19,7 @@ public static class DiRegistration
         services.AddScoped<IFoodNutritionDataHandler, FoodNutritionDataHandler>();
         services.AddScoped<IFoodLogDataHandler, FoodLogDataHandler>();
         //services.AddScoped<IFoodItemService, FoodItemDataHandler>();
-        //services.AddScoped<IUserService, UserDataHandler>();
+        services.AddScoped<IUserDataHandler, UserDataHandler>();
 
         //repositories
         services.AddScoped<IFoodNutritionRepository, FoodNutritionRepository>();

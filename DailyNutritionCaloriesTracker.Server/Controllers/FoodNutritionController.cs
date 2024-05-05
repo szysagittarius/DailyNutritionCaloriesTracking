@@ -41,7 +41,8 @@ public class FoodNutritionController : ControllerBase
 
         IEnumerable<FoodNutritionEntity> entities = await _foodNutritionService.GetFoodNutritionAsync();
 
-        IEnumerable<FoodNutritionDto> entitieDtos = entities.Select(e => dtoMapper.Map<FoodNutritionDto>(e)); ;
+        IEnumerable<FoodNutritionDto> entitieDtos = entities.Select(e => dtoMapper.Map<FoodNutritionDto>(e));
+
 
         return entitieDtos;
     }

@@ -7,9 +7,9 @@ public static class DiRegistration
 {
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IFoodLogService, FoodLogService>();
         services.AddScoped<IFoodNutritionService, FoodNutritionService>();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

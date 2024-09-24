@@ -37,13 +37,12 @@
                         return response.json();
                     })
                     .then(json => {
-                        // Assuming json is already an array with the correct structure
-                        this.logs = json;
-                        this.loading = false;
+                        this.logs = json; // Update logs data
+                        this.loading = false; // Set loading state to false
                     })
                     .catch(error => {
                         console.error('There was a problem with the fetch operation:', error);
-                        this.loading = false;
+                        this.loading = false; // Set loading state to false
                     });
             },
         }

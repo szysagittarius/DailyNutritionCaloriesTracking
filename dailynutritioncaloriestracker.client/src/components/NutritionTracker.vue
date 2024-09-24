@@ -20,7 +20,7 @@
             <progress-bar label="Protein" :value="totalProtein" :max="suggestedProtein" color="blue"></progress-bar>
 
             <div v-if="post" class="content">
-                <DailyFoodEntryTable :post="post" :entries="entries" />
+                <DailyFoodEntryTable :post="post" :entries="entries" submitFoodLog="submitFoodLogToApp"/>
             </div>
 
             <!-- Display nutrition table so far -->
@@ -94,6 +94,10 @@
             calculateTotal(nutrient) {
                 return this.entries.reduce((total, entry) => total + entry[nutrient], 0);
             },
+            submitFoodLogToApp() {
+                // Re-emit the event to the parent component (App.vue)
+                this.$emit('submitFoodLog');
+            }
         },
         created() {
             this.fetchData();

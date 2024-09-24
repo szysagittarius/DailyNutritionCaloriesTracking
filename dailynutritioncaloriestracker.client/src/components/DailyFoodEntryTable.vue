@@ -92,12 +92,16 @@
                     .then(response => {
                         console.log('Food log created successfully:', response.data);
                         alert('Food log submitted successfully!');
+
+                        // Emit an event to trigger food log refresh
+                        this.$emit('submitFoodLog');
                     })
                     .catch(error => {
                         console.error('Error creating food log:', error);
                         alert('Failed to submit food log!');
                     });
             }
+            
         }
     }
 </script>

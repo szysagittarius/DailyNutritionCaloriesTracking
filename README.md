@@ -24,6 +24,10 @@ A web application inspired by the Microsoft To-Do app that helps users track the
 - Data Analysis: Potential future integration with data mining tools
 
 
+## Data source
+- from USDA National Nutrient Database - "https://fdc.nal.usda.gov/data-documentation.html"
+
+
 ## Database update
 - To update the database,
 - Need to install the EF Core design package in both the server and database projects.

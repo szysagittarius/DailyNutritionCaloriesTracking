@@ -25,10 +25,17 @@ public static class DependencyRegistration
 
         services.RegisterApplicationServices();
 
+        // Add logging
+        services.AddLogging();
+        var serviceProvider = services.BuildServiceProvider();
+        var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("DiRegistration");
+
+        logger.LogInformation("From api level, Database connection string is: {ConnectionString}", configurationManager.GetConnectionString("NutritionTracker"));
+
         services.RegisterEfDatabase(option =>
         {
             option.ConnectionString = configurationManager.GetConnectionString("NutritionTracker");
-        });
+        }, logger);
         services.RegisterRepository();
 
         return services;
